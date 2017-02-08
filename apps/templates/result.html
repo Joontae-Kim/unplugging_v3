@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>전기요금 분석결과 | 가정용 전기요금 계산 및 분석 서비스</title>
+    <meta charset="UTF-8">	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Joontae Kim">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="우리집 전기요금 계산기를 이용해 전기요금뿐만 아니라 사용패턴까지 자가분석해보세요!">
+	<meta name="keywords" content="전기요금, 전기세, 전기요금 계산기, 가정용 전기요금, 우리집 전기요금, 우리집 전기세, 가정용 전기세, 한국전력 전기요금 계산기, 가전제품, 냉장고, 에어컨">
+	<meta name="author" content="Joontae Kim">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="우리집 전기세">
+	<meta property="og:description" content="우리집 전기요금 계산기를 이용해 전기요금뿐만 아니라 사용패턴까지 자가분석해보세요!">
+	<meta property="og:image" content="../static/img/logo.png">
+	<meta property="og:url" content="http://unpluging.com">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link rel="stylesheet" href="../static/bootstrap3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/bootstrap3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+	<link href="../static/css/result.css" media="screen and (min-width: 768px)" rel="stylesheet">
+	<link href="../static/css/resultmobile.css" media="screen and (min-width: 320px) and (max-width: 767px)" rel="stylesheet">
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+	<script type="text/javascript" src="../static/js/jqeury-2.1.3.min.js"></script>
+	<script type="text/javascript" src="../static/bootstrap3.3.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="../static/js/resultsRest.js"></script>
+    <script type="text/javascript" src="../static/js/chartlib2.js"></script>
+    <script type="text/javascript" src="../static/js/calculatResult2.js"></script>
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<!--[if lte IE 8]>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<link rel="stylesheet" href="ie8.css" />
+		<script type="text/javascript" src="selectivizr.js"></script>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<header>
+	</header>
+	<article>
+		<div class="container-fluid resultbox col-lg-offset-3 col-lg-6 col-sm-offset-1 col-sm-10">
+			<div class="row title text-center">
+				<h4> 예상요금 분석결과 </h4>
+				<h5> <a href="/"><span type="button" class="glyphicon glyphicon-home col-md-1 pull-right" style="margin-top: -2.0em;"></span></a></h5>
+
+			</div>
+			<div class="row">
+			  	<div class="col-lg-12 col-xs-12 col-md-12 content_btn text-center">
+					<ul class="nav nav-tabs nav-justified">
+					  <li class="active"><a data-toggle="tab" href="#summary" class="text-center">청구요약</a></li>
+					  <li class=""><a data-toggle="tab" href="#detail" class="text-center">상세내역</a></li>
+					  <li class="dropdown">
+					      <a class="dropdown-toggle" data-toggle="dropdown">연간내역 <span class="caret"></span></a>
+					      <ul class="dropdown-menu dropdown-menu-left">
+					        <li><a href="#spring" id="springTab" role="tab" data-toggle="tab">봄</a></li>
+					        <li><a href="#summer" id="summerTab" role="tab" data-toggle="tab">여름</a></li>
+					        <li><a href="#fall" id="fallTab" role="tab" data-toggle="tab">가을</a></li>
+					        <li><a href="#winter" id="winterTab" role="tab" data-toggle="tab">겨울</a></li>
+					      </ul>
+					  </li>
+					</ul>
+					<div class="row tab-content result-tabcontent">
+						<div id="summary" class="tab-pane fade in active">
+							<div class="col-lg-offset-1 col-lg-4 col-xs-6 col-sm-6 col-md-6 eleclevel text-center">
+								<div class="circle dir_cle">
+								  <div class="circle1">
+								    <div class="fee">
+									    <h4 class="slevel"> </h4>
+								    </div>
+								  </div>
+								</div>
+							</div>
+						  	<div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right user">
+								<h4 class="userNm sdisNm"></h4>
+								<h4 class="scost"></h4>
+								<h4><small id="shous"></small></h4>
+								<h4><small id="sfam"></small></h4>
+						  	</div>
+							<div class="col-xs-12">
+							<hr>
+							  <div class="panel panel-default">
+							      <table class="table summaryResults">
+							        <thead>
+							          <tr>
+							            <td class="col-xs-1" scope="row"></td>
+							              <td class="col-xs-3" id="sdate"> </td>
+							              <td class="col-xs-2"></td>
+							              <td class="col-xs-3 sdisNm"></td>
+							              <td class="col-xs-1"></td>
+							          </tr>
+							        </thead>
+							        <tbody>
+							          <tr>
+							            <td scope="row"> </td>
+							              <td> 적용주택 요금</td>
+							              <td> </td>
+							              <td id="sadj"></td>
+							              <td> </td>
+							          </tr>
+							          <tr>
+							            <td scope="row"> </td>
+							              <td> 누진세 단계 </td>
+							              <td> </td>
+							              <td class="slevel"></td>
+							              <td> </td>
+							          </tr>     
+							          <tr>
+							            <td scope="row"> </td>
+							              <td> 전기 요금 </td>
+							              <td> </td>
+							              <td class="scost"></td>
+							              <td> </td>
+							          </tr>
+							          <tr>
+							            <td scope="row"> </td>
+							              <td> 전기사용량 </td>
+							              <td> </td>
+							              <td id="sconsm"></td>
+							              <td> </td>
+							          </tr>
+							          <tr>
+							            <td scope="row"> </td>
+							              <td> 가전 제품수 </td>
+							              <td> </td>
+							              <td id="sapplen"></td>
+							              <td> </td>
+							          </tr>										
+							        </tbody>
+							      </table>
+							    </div>
+							</div>
+			              	<div class="col-xs-12 guideline">
+				              	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				              	<h4 class="text-right guide"><sub><strong> 주거형태가 아파트인 경우, </strong>귀하의 아파트 전력공급 계약방식에 따라 상기 적용주택 요금과 다를 수 있습니다.</sub></h4>
+			              	</div>
+						</div>
+						<div id="detail" class="tab-pane fade">
+							<div class="col-lg-offset-1 col-lg-4 col-xs-6 col-sm-6 col-md-6 eleclevel text-center">
+								<div class="circle dir_cle">
+								  <div class="circle1">
+								    <div class="fee">
+									    <h4 class="dlevel"></h4>
+								    </div>
+								  </div>
+								</div>
+							</div>
+						  	<div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right user">
+								<span data-toggle="modal" data-target=".pricing-modal-sm"><h4 id="dadj"></h4></span>
+								<h4 class="dtotal"></h4>
+								<h4><small id="dwFapt"></small></h4>
+								<h4><small id="dwWelapt"></small></h4>
+						  	</div>
+							<div class="col-xs-12">
+							<hr>
+								<div class="panel panel-default">
+								    <table class="table summaryResults">
+								        <thead>
+									        <tr>
+										        <td class="col-xs-1" scope="row"></td>
+										        <td class="col-xs-5"> 기본 요금</td>
+										        <td class="col-xs-3" id="dbse"> </td>
+									        </tr>
+								        </thead>
+								        <tbody>
+								        	<tr>
+										        <td scope="row"></td>
+										        <td> 전력량 요금</td>
+										        <td id="delec"> </td>
+								          	</tr>
+								          	<tr>
+									          	<td scope="row"></td>
+									            <td> 복지 할인 </td>
+									            <td id="dwel"> </td>
+								          	</tr>     
+								          	<tr>
+										        <td scope="row"></td>
+									            <td> 전기요금계 </td>
+									            <td id="dbasetotal"> </td>
+								          	</tr>
+								          	<tr>
+									          	<td scope="row"></td>
+									            <td> 부가가치세 </td>
+									            <td id="dvat"> </td>
+								          	</tr>
+								          	<tr>
+										        <td scope="row"></td>
+									            <td> 전력산업 발전기금 </td>
+									            <td id="dfund"> </td>
+								          	</tr>
+								          	<tr>
+									          	<td scope="row"></td>
+									            <td> 청구 금액 </td>
+									            <td class="dtotal"> </td>
+								          	</tr>
+								        </tbody>
+								    </table>
+								</div>
+							</div>
+			              	<div class="col-xs-12 guideline">
+				              	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				              	<h4 class="text-right guide"><sub><strong> 요금에 대한 정보는 </strong> 주거용 저압을 클릭하시면 됩니다.</sub></h4>
+			              	</div>
+						</div>
+						<!-- detail tab-content -->
+						<div id="spring" class="tab-pane fade ssTab">
+							<div class="col-lg-offset-1 col-lg-4 col-xs-6 col-sm-6 col-md-6 eleclevel text-center">
+								<div class="circle sprlevel">
+								  <div class="circle1">
+								    <div class="fee">
+									    <h4 id="sprlevel"> 3 등급</h4>
+								    </div>
+								  </div>
+								</div>
+							</div>
+						  	<div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right user">
+								<h4 class="userNm"> <u><strong>&nbsp;봄&nbsp;</strong></u> <small>예상요금</small> </h4>
+								<h4 id="sprCost"></h4>
+								<h4><small>전력사용량 : </small><small id="sprWatt"></small></h4>
+								<h4><small>제품 개수 : </small><small id="sprLen"></small></h4>
+						  	</div>
+							<div class="col-xs-12">
+								<hr>
+								<h4 class="text-left">&nbsp;&nbsp;1. 가전군 사용패턴</h4>
+								<div class="panel panel-default analyzePanel">
+									<div class="panel-body">
+									    <h4 class="text-left"> &nbsp;&nbsp;<b>주방가전</b> &nbsp;&nbsp;<small id="sprkitWatt"></small>&nbsp;&nbsp;<small id="sprkitCost"></small>&nbsp;&nbsp;<small id="sprkitCount"></small>
+									    </h4>
+								      	<div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-warning progress-bar-striped" id="sprkitShrbar" role="progressbar" aria-valuemin="0" aria-valuemax="100"/>
+										        <b><div id="sprkitShr"></div></b>
+									        </div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>생활가전</b> &nbsp;&nbsp;<small id="sprlvWatt"></small>&nbsp;&nbsp;<small id="sprlvCost"></small>&nbsp;&nbsp;<small id="sprlvCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+								          	<div class="progress-bar progress-bar-success progress-bar-striped" id="sprlvShrbar" aria-valuemin="0" aria-valuemax="100"/>
+									          	<b> <div id="sprlvShr"></div> </b>
+								          	</div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>계절가전</b> &nbsp;&nbsp;<small id="sprssWatt"></small>&nbsp;&nbsp;<small id="sprssCost"></small>&nbsp;&nbsp;<small id="sprssCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-info progress-bar-striped" id="sprssShrbar" aria-valuemin="0" aria-valuemax="100"/>
+									        	<b><div id="sprssShr"></div></b>
+								          	</div>
+										</div>
+									</div>
+								</div>
+								<blockquote>
+									<p><span class="sprgrp"></span>가전군의 전력소비율은 전체 소비량 대비 <span id="sprgrpShr"></span>로 타 가전군보다 높은 전력량을 소비하고 있으며, &nbsp;전기요금은 <span id="sprgrpCost"></span> 원입니다.</p>
+								</blockquote>
+								<hr>
+								<div class="col-md-12">
+									<h4 class="text-left">2. 제품별 패턴</h4>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="panel panel-default analyzePanel">
+											<div class="panel-body">
+										        <div class="chart_div" id="chart_springTab"></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="panel panel-default">
+										  <div class="panel-heading"><strong>전력소비량 기준 상위 5개 제품</strong></div>
+										  <table class="table" id="sprTable">
+										    <thead>
+										    	<tr>
+										    		<th class="text-center">#</th>
+										    		<th class="text-center">제품명</th>
+										    		<th class="text-center">사용량</th>
+										    		<th class="text-center">요금</th>
+										    		<th class="text-center">비율</th>
+										    	</tr>
+										    </thead>
+										    <tbody id="sprTbl">
+										    </tbody>
+										    <tfoot id="sprTblfoot">
+										    </tfoot>
+										  </table>
+										</div>
+										<p class="unitsmr col-md-offset-5 col-xs-offset-5">※ 사용량:  kW,  요금:  원,  비율:  %</p>
+									</div>									
+								</div>
+							</div>
+						</div>
+						<!-- spring tab-contents -->
+						<div id="summer" class="tab-pane fade ssTab">
+							<div class="col-lg-offset-1 col-lg-4 col-xs-6 col-sm-6 col-md-6 eleclevel text-center">
+								<div class="circle smlevel">
+								  <div class="circle1">
+								    <div class="fee">
+									    <h4 id="smlevel"></h4>
+								    </div>
+								  </div>
+								</div>
+							</div>
+						  	<div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right user">
+								<h4 class="userNm"> <u><strong>&nbsp;여름&nbsp;</strong></u> <small>예상요금</small> </h4>
+								<h4 id="smCost">13,000 원</h4>
+								<h4><small>전력사용량 : </small><small id="smWatt"></small></h4>
+								<h4><small>제품 개수 : </small><small id=smLen></small></h4>
+						  	</div>
+							<div class="col-xs-12">
+								<hr>
+								<h4 class="text-left">&nbsp;&nbsp;1. 가전군 사용패턴</h4>
+								<div class="panel panel-default analyzePanel">
+									<div class="panel-body">
+									    <h4 class="text-left"> &nbsp;&nbsp;<b>주방가전</b> &nbsp;&nbsp;<small id="smkitWatt"></small>&nbsp;&nbsp;<small id="smkitCost"></small>&nbsp;&nbsp;<small id="smkitCount"></small>
+									    </h4>
+								      	<div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-warning progress-bar-striped" id="smkitShrbar" role="progressbar" aria-valuemin="0" aria-valuemax="100"/>
+										        <b><div id="smkitShr"></div></b>
+									        </div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>생활가전</b> &nbsp;&nbsp;<small id="smlvWatt"></small>&nbsp;&nbsp;<small id="smlvCost"></small>&nbsp;&nbsp;<small id="smlvCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+								          	<div class="progress-bar progress-bar-success progress-bar-striped" id="smlvShrbar" aria-valuemin="0" aria-valuemax="100"/>
+									          	<b> <div id="smlvShr"></div> </b>
+								          	</div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>계절가전</b> &nbsp;&nbsp;<small id="smssWatt"></small>&nbsp;&nbsp;<small id="smssCost"></small>&nbsp;&nbsp;<small id="smssCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-info progress-bar-striped" id="smssShrbar" aria-valuemin="0" aria-valuemax="100"/>
+									        	<b> <div id="smssShr"></div> </b>
+								          	</div>
+										</div>
+									</div>
+								</div>
+								<blockquote>
+									<p><span class="smgrp"></span>가전군의 전력소비율은 전체 소비량 대비 <span id="smgrpShr"></span>로 타 가전군보다 높은 전력량을 소비하고 있으며, &nbsp;전기요금은 <span id="smgrpCost"></span> 원입니다.</p>
+								</blockquote>
+								<hr>
+								<div class="col-md-12">
+									<h4 class="text-left">2. 가전별 패턴</h4>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="panel panel-default analyzePanel">
+											<div class="panel-body">
+										        <div class="chart_summerTab" id="chart_summerTab"></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="panel panel-default">
+										  	<div class="panel-heading"><strong>전력소비량 기준 상위 5개 제품</strong></div>
+										  	<table class="table">
+										    <thead>
+										    	<tr>
+										    		<th class="text-center">#</th>
+										    		<th class="text-center">제품명</th>
+										    		<th class="text-center">사용량</th>
+										    		<th class="text-center">요금</th>
+										    		<th class="text-center">비율</th>
+										    	</tr>
+										    </thead>
+										    <tbody id="smTbl">
+										    </tbody>
+										    <tfoot id="smTblfoot">
+										    </tfoot>
+										  </table>
+										</div>
+										<p class="unitsmr col-md-offset-5 col-xs-offset-5">※ 사용량:  kW,  요금:  원,  비율:  %</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- summer tab-contents -->
+						<div id="fall" class="tab-pane fade ssTab">
+							<div class="col-lg-offset-1 col-lg-4 col-xs-6 col-sm-6 col-md-6 eleclevel text-center">
+								<div class="circle fllevel">
+								  <div class="circle1">
+								    <div class="fee">
+									    <h4 id="fllevel"> 3 등급</h4>
+								    </div>
+								  </div>
+								</div>
+							</div>
+						  	<div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right user">
+								<h4 class="userNm"> <u><strong>&nbsp;가을&nbsp;</strong></u> <small>예상요금</small> </h4>
+								<h4 id="flCost"></h4>
+								<h4><small>전력사용량 : </small><small id="flWatt"></small></h4>
+								<h4><small>제품 개수 : </small><small id="flLen"></small></h4>
+						  	</div>
+							<div class="col-xs-12">
+								<hr>
+								<h4 class="text-left">&nbsp;&nbsp;1. 가전군 사용패턴</h4>
+								<div class="panel panel-default analyzePanel">
+									<div class="panel-body">
+									    <h4 class="text-left"> &nbsp;&nbsp;<b>주방가전</b> &nbsp;&nbsp;<small id="flkitWatt"></small>&nbsp;&nbsp;<small id="flkitCost"></small>&nbsp;&nbsp;<small id="flkitCount"></small>
+									    </h4>
+								      	<div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-warning progress-bar-striped" id="flkitShrbar" role="progressbar" aria-valuemin="0" aria-valuemax="100"/>
+										        <b> <div id="flkitShr"></div> </b>
+									        </div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>생활가전</b> &nbsp;&nbsp;<small id="fllvWatt"></small>&nbsp;&nbsp;<small id="fllvCost"></small>&nbsp;&nbsp;<small id="fllvCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+								          	<div class="progress-bar progress-bar-success progress-bar-striped" id="fllvShrbar" aria-valuemin="0" aria-valuemax="100"/>
+									          	<b><div id="fllvShr"></div></b>
+								          	</div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>계절가전</b> &nbsp;&nbsp;<small id="flssWatt"></small>&nbsp;&nbsp;<small id="flssCost"></small>&nbsp;&nbsp;<small id="flssCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-info progress-bar-striped" id="flssShrbar" aria-valuemin="0" aria-valuemax="100"/>
+									        	<b><div id="flssShr"></div></b>
+								          	</div>
+										</div>
+									</div>
+								</div>
+								<blockquote>
+									<p><span class="flgrp"></span>가전군의 전력소비율은 전체 소비량 대비 <span id="flgrpShr"></span>로 타 가전군보다 높은 전력량을 소비하고 있으며, &nbsp;전기요금은 <span id="flgrpCost"></span> 원입니다.</p>
+								</blockquote>
+								<hr>
+								<div class="col-md-12">
+									<h4 class="text-left">2. 가전별 패턴</h4>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="panel panel-default analyzePanel">
+											<div class="panel-body">
+										        <div class="chart_div" id="chart_fallTab"></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="panel panel-default">
+										  	<div class="panel-heading"><strong>전력소비량 기준 상위 5개 제품</strong></div>
+										  	<table class="table">
+											    <thead>
+											    	<tr>
+											    		<th class="text-center">#</th>
+											    		<th class="text-center">제품명</th>
+											    		<th class="text-center">사용량</th>
+											    		<th class="text-center">요금</th>
+											    		<th class="text-center">비율</th>
+											    	</tr>
+											    </thead>
+											    <tbody id="flTbl">
+											    </tbody>
+											    <tfoot id="flTblfoot">
+											    </tfoot>
+										  	</table>
+										</div>
+										<p class="unitsmr col-md-offset-5 col-xs-offset-5">※ 사용량:  kW,  요금:  원,  비율:  %</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- fall tab-contents -->
+						<div id="winter" class="tab-pane fade ssTab">
+							<div class="col-lg-offset-1 col-lg-4 col-xs-6 col-sm-6 col-md-6 eleclevel text-center">
+								<div class="circle wtlevel">
+								  <div class="circle1">
+								    <div class="fee">
+									    <h4 id="wtlevel"></h4>
+								    </div>
+								  </div>
+								</div>
+							</div>
+						  	<div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right user">
+								<h4 class="userNm"><u><strong>&nbsp;겨울&nbsp;</strong></u><small>예상요금</small> </h4>
+								<h4 id="wtCost"></h4>
+								<h4><small>전력사용량 : </small><small id="wtWatt"></small></h4>
+								<h4><small>제품 개수 : </small><small id="wtLen"></small></h4>
+						  	</div>
+							<div class="col-xs-12">
+								<hr>
+								<h4 class="text-left">&nbsp;&nbsp;1. 가전군 사용패턴</h4>
+								<div class="panel panel-default analyzePanel">
+									<div class="panel-body">
+									    <h4 class="text-left"> &nbsp;&nbsp;<b>주방가전</b> &nbsp;&nbsp;<small id="wtkitWatt"></small>&nbsp;&nbsp;<small id="wtkitCost"></small>&nbsp;&nbsp;<small id="wtkitCount"></small>
+									    </h4>
+								      	<div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-warning progress-bar-striped" id="wtkitShrbar" role="progressbar" aria-valuemin="0" aria-valuemax="100"/>
+										        <b> <div id="wtkitShr"></div> </b>
+									        </div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>생활가전</b> &nbsp;&nbsp;<small id="wtlvWatt"></small>&nbsp;&nbsp;<small id="wtlvCost"></small>&nbsp;&nbsp;<small id="wtlvCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+								          	<div class="progress-bar progress-bar-success progress-bar-striped" id="wtlvShrbar" aria-valuemin="0" aria-valuemax="100"/> 
+									          	<b> <div id="wtlvShr"></div> </b>
+								          	</div>
+									    </div>
+
+									    <h4 class="text-left">&nbsp;&nbsp;<b>계절가전</b> &nbsp;&nbsp;<small id="wtssWatt"></small>&nbsp;&nbsp;<small id="wtssCost"></small>&nbsp;&nbsp;<small id="wtssCount"></small>
+									    </h4>
+									    <div class="progress progress-sm">
+									        <div class="progress-bar progress-bar-info progress-bar-striped" id="wtssShrbar" aria-valuemin="0" aria-valuemax="100"/> 
+									        	<b> <div id="wtssShr"></div> </b>
+								          	</div>
+										</div>
+									</div>
+								</div>
+								<blockquote>
+									<p><span class="wtgrp"></span>가전군의 전력소비율은 전체 소비량 대비 <span id="wtgrpShr"></span>로 타 가전군보다 높은 전력량을 소비하고 있으며, &nbsp;전기요금은 <span id="wtgrpCost"></span> 원입니다.</p>
+								</blockquote>
+								<hr>
+								<div class="col-md-12">
+									<h4 class="text-left">2. 가전별 패턴</h4>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="panel panel-default analyzePanel">
+											<div class="panel-body">
+										        <div class="chart_div" id="chart_winterTab"></div>
+											</div>
+										</div>										
+									</div>
+									<div class="col-md-6">
+										<div class="panel panel-default">
+										  	<div class="panel-heading"><strong>전력소비량 기준 상위 5개 제품</strong></div>
+										  	<table class="table">
+											    <thead>
+											    	<tr>
+											    		<th class="text-center">#</th>
+											    		<th class="text-center">제품명</th>
+											    		<th class="text-center">사용량</th>
+											    		<th class="text-center">요금</th>
+											    		<th class="text-center">비율</th>
+											    	</tr>
+											    </thead>
+											    <tbody id="wtTbl">
+											    </tbody>
+										    	<tfoot id="wtTblfoot">
+										    	</tfoot>
+										  	</table>
+										</div>
+										<p class="unitsmr col-md-offset-5 col-xs-offset-5">※ 사용량:  kW,  요금:  원,  비율:  %</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- winter tab-contents -->
+		  		</div>
+			</div>
+		</div>
+
+		<div class="modal fade pricing-modal-sm fade" tabindex="1" role="dialog" aria-labelledby="electricPricing" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">  <!-- modal-lg -->
+		    <div class="modal-content">
+			    <nav class="navbar navbar-default"> 
+			      <div class="container">
+			        <div class="navbar-header">
+			          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			            <span class="sr-only">Toggle navigation</span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			          </button>
+			          <a class="navbar-brand">우리집 전기요금 계산방법</a>
+			        </div>
+			        <div id="navbar" class="navbar-collapse collapse">
+		            <ul class="nav navbar-nav">
+		              <li class="active"><a data-toggle="tab" href="#howTo">전기요금 계산방법</a></li>
+		              <li><a data-toggle="tab" href="#menu1">주택용 전기요금제도</a></li>
+		              <li><a data-toggle="tab" href="#menu2">아파트 전기요금제도</a></li>
+		              <li><a data-toggle="tab" href="#menu3">복지할인제도</a></li>
+		            </ul>
+			        </div><!--/.nav-collapse -->
+			      </div>
+			    </nav>
+				<div class="modal-body">
+					<div class="tab-content">
+					  	<div id="howTo" class="tab-pane fade in active"> <!-- 전기요금 계산방법 -->
+						  	<h4>1. 전기요금 </h4>
+						  	<p><small>주택용 전기요금은 기본요금과 전력량요금으로 구성되어 있으며, 전기공급방식(고압, 저압)에 따라 각각 다른 전기요금 단가로 구분하여 누진율을 적용합니다.</small></p>
+							<hr>
+							<h4>2. 주택용전력 요금표</h4>
+							<div class="pricingtabs">
+								<ul class="nav nav-tabs nav-justified">
+							      <li class="active"><a data-toggle="tab" href="#lower" class="text-center">저압</a></li>
+							      <li class=""><a data-toggle="tab" href="#higher" class="text-center">고압</a></li>
+							  	</ul>
+
+							  	<div class="tab-content">
+							    	<div id="lower" class="tab-pane active">
+									  	<table class="table pricing">
+										    <thead>
+										      	<tr>
+										        	<th colspan="2">기본요금(원/호)</th>
+										        	<th colspan="2">전력량요금(원/kWh)</th>
+										      	</tr>
+										    </thead>
+										    <tbody>
+										      	<tr>
+										        	<th>사용량 구간</th>
+											        <th>요금</th>
+											        <th>사용량 구간</th>
+											        <th>요금</th>
+										      	</tr>
+										      	<tr>
+											        <td>100kWh이하</td>
+											        <td>410</td>
+											        <td>100kWh 까지</td>
+											        <td>60.7</td>
+										      	</tr>
+										      	<tr>
+											        <td>101~200kWh</td>
+											        <td>910</td>
+											        <td>다음 100kWh</td>
+											        <td>125.9</td>
+										      	</tr>
+										      	<tr>
+											        <td>201~300kWh</td>
+											        <td>1,600</td>
+											        <td>다음 100kWh</td>
+											        <td>187.9</td>
+											    </tr>
+										      	<tr>
+											        <td>301~400kWh</td>
+											        <td>3,850</td>
+											        <td>다음 100kWh</td>
+											        <td>280.6</td>
+										      	</tr>
+										      	<tr>
+											        <td>401~500kWh</td>
+											        <td>7,300</td>
+											        <td>다음 100kWh</td>
+											        <td>417.7</td>
+										      	</tr>
+										      	<tr>
+											        <td>500kWh 초과</td>
+											        <td>12,940</td>
+											        <td>다음 100kWh</td>
+											        <td>709.5</td>
+										      	</tr>
+										    </tbody>
+										</table>
+							    	</div>
+							    	<div id="higher" class="tab-pane">
+									  	<table class="table pricing">
+										    <thead>
+										      	<tr>
+										        	<th colspan="2">기본요금(원/호)</th>
+										        	<th colspan="2">전력량요금(원/kWh)</th>
+										      	</tr>
+										    </thead>
+										    <tbody>
+										      	<tr>
+										        	<th>사용량 구간</th>
+											        <th>요금</th>
+											        <th>사용량 구간</th>
+											        <th>요금</th>
+										      	</tr>
+										      	<tr>
+											        <td>100kWh이하</td>
+											        <td>410</td>
+											        <td>100kWh 까지</td>
+											        <td>57.6</td>
+										      	</tr>
+										      	<tr>
+											        <td>101~200kWh</td>
+											        <td>730</td>
+											        <td>다음 100kWh</td>
+											        <td>98.9</td>
+										      	</tr>
+										      	<tr>
+											        <td>201~300kWh</td>
+											        <td>1,260</td>
+											        <td>다음 100kWh</td>
+											        <td>147.3</td>
+											    </tr>
+										      	<tr>
+											        <td>301~400kWh</td>
+											        <td>3,170</td>
+											        <td>다음 100kWh</td>
+											        <td>215.6</td>
+										      	</tr>
+										      	<tr>
+											        <td>401~500kWh</td>
+											        <td>6,060</td>
+											        <td>다음 100kWh</td>
+											        <td>325.7</td>
+										      	</tr>
+										      	<tr>
+											        <td>500kWh 초과</td>
+											        <td>10,760</td>
+											        <td>다음 100kWh</td>
+											        <td>574.6</td>
+										      	</tr>
+										    </tbody>
+										</table>
+							    	</div>
+							  	</div>
+						  	</div>
+						  	<hr>
+						  	<h4>3. 전기요금 계산방법 </h4>
+						  	<h5><strong> &nbsp;&nbsp;- 계산조건</strong></h5>
+							<ul class="list-unstyled">
+							  	<ul>
+								    <li>주거구분 - 단독주택</li>
+								    <li>적용 주택요금 - 저압</li>
+								    <li>할인 혜택 - 미적용</li>
+								    <li>사용량 150kWh</li>
+						  		</ul>
+							</ul>
+							<table class="table table-striped table-condensed calTable">
+							  	<thead>
+								  	<tr>
+								  		<td class="col-xs-1">#</td>
+								  		<td class="col-xs-3">항목</td>
+								  		<td class="col-xs-4">계산</td>
+								  	</tr>
+							  	</thead>
+							  	<tbody>
+							  		<tr>
+							  			<td>1</td>
+							  			<td>기본요금 <br><small>원미만 절사</small></td>
+							  			<td><small>전력사용량에 따른 기본요금 적용 (단일요금 적용)</small></td>
+							  		</tr>
+							  		<tr>
+							  			<td>2</td>
+							  			<td>전력량요금 <br><small>원미만 절사</small></td>
+							  			<td><small>전력사용량에 따른 사용량요금 적용(누진요금 적용)</small></td>
+							  		</tr>
+							  		<tr>
+							  			<td>3</td>
+							  			<td>전기요금계</td>
+							  			<td><small>기본요금 &#43; 전력량요금</small></td>
+							  		</tr>
+							  		<tr>
+							  			<td>4</td>
+							  			<td>부가가치세 <br> <small>원미만 4사 5입</small></td>
+							  			<td><small>전기요금계 &#215; 10%</small>
+							  			</td>
+							  		</tr>
+							  		<tr>
+							  			<td>5</td>
+							  			<td>전력산업기반기금 <br> <small>10원미만 절사</small></td>
+							  			<td><small>전기요금계 &#215; 3.7%</small></td>
+							  		</tr>
+							  		<tr>
+							  			<td>6</td>
+							  			<td>청구금액<br> <small>10원미만 절사</small></td>
+							  			<td><small>전기요금계 &#43; 부가가치세 &#43; 전력산업기반기금</small></td>
+							  		</tr>
+							  	</tbody>
+							</table>
+
+						  	<!-- <p><small>주택용 전기요금은 기본요금과 전력량요금으로 구성되어 있으며, 전기공급방식(고압, 저압)에 따라 각각 다른 전기요금 단가로 구분하여 누진율을 적용합니다.</small></p> -->
+					  	</div>
+					  	<div id="menu1" class="tab-pane fade">
+					  		<h4>1. 주택용 전력(저압)</h4>
+					  		<p><small>&#8728; 주거용 고객(아파트 고객 포함, 계약전력 <strong>3kW 이하</strong>의 고객</small> <br>
+					  		<small>&#8728; 독신자 합숙소(기숙사 포함) 또는 집단주거용 사회복지시설로서 고객이 주택용 전력의 적용을 희망하는 경우 적용</small><br>
+					  		<small>&#8728; 주거용 오피스텔 고객(주택은 아니지만 실제 주거용도로 이용되는 오피스텔)</small></p>
+					  		<hr>
+					  		<h4>2. 주택용 전력 저압요금표</h4>
+						  	<table class="table pricing">
+							    <thead>
+							      	<tr>
+							        	<th colspan="2">기본요금(원/호)</th>
+							        	<th colspan="2">전력량요금(원/kWh)</th>
+							      	</tr>
+							    </thead>
+							    <tbody>
+							      	<tr>
+							        	<th>사용량 구간</th>
+								        <th>요금</th>
+								        <th>사용량 구간</th>
+								        <th>요금</th>
+							      	</tr>
+							      	<tr>
+								        <td>100kWh이하</td>
+								        <td>410</td>
+								        <td>100kWh 까지</td>
+								        <td>60.7</td>
+							      	</tr>
+							      	<tr>
+								        <td>101~200kWh</td>
+								        <td>910</td>
+								        <td>다음 100kWh</td>
+								        <td>125.9</td>
+							      	</tr>
+							      	<tr>
+								        <td>201~300kWh</td>
+								        <td>1,600</td>
+								        <td>다음 100kWh</td>
+								        <td>187.9</td>
+								    </tr>
+							      	<tr>
+								        <td>301~400kWh</td>
+								        <td>3,850</td>
+								        <td>다음 100kWh</td>
+								        <td>280.6</td>
+							      	</tr>
+							      	<tr>
+								        <td>401~500kWh</td>
+								        <td>7,300</td>
+								        <td>다음 100kWh</td>
+								        <td>417.7</td>
+							      	</tr>
+							      	<tr>
+								        <td>500kWh 초과</td>
+								        <td>12,940</td>
+								        <td>다음 100kWh</td>
+								        <td>709.5</td>
+							      	</tr>
+							    </tbody>
+							</table>
+					  		<hr>
+						  	<h4>3. 전기요금 계산예시 </h4>
+						  	<h5><strong> &nbsp;&nbsp;- 계산조건</strong></h5>
+							<ul class="list-unstyled">
+							  	<ul>
+								    <li>주거구분 - 단독주택</li>
+								    <li>적용 주택요금 - 저압</li>
+								    <li>할인 혜택 - 미적용</li>
+								    <li>사용량 150kWh</li>
+						  		</ul>
+							</ul>
+							<table class="table table-striped table-condensed">
+							  	<thead>
+								  	<tr>
+								  		<td>#</td>
+								  		<td>항목</td>
+								  		<td>계산</td>
+								  	</tr>
+							  	</thead>
+							  	<tbody>
+							  		<tr>
+							  			<td>1</td>
+							  			<td>기본요금 <br><small>원미만 절사</small></td>
+							  			<td>910 원 <br> <small>저압 기본요금 2단계 적용</small></td>
+							  		</tr>
+							  		<tr>
+							  			<td>2</td>
+							  			<td>전력량요금 <br><small>원미만 절사</small></td>
+							  			<td>12,365 원 <br> 
+							  				<small>1단계 : 100kWh x 60.7원 = 6,070원 <br>2단계 : 50kWh x  125.9원 = 6,295원</small>
+						  				</td>
+							  		</tr>
+							  		<tr>
+							  			<td>3</td>
+							  			<td>전기요금계</td>
+							  			<td>13,275 원 <br>
+								  			<small>기본요금 &#43; 전력량요금</small>
+							  			</td>
+							  		</tr>
+							  		<tr>
+							  			<td>4</td>
+							  			<td>부가가치세 <br> <small>원미만 4사 5입</small></td>
+							  			<td>1,328 원 <br> <small>13,275원 &#215; 10%</small>
+							  			</td>
+							  		</tr>
+							  		<tr>
+							  			<td>5</td>
+							  			<td>전력산업기반기금 <br> <small>10원미만 절사</small></td>
+							  			<td>490 원 <br> <small>13,275 &#215; 3.7%</small></td>
+							  		</tr>
+							  		<tr>
+							  			<td>6</td>
+							  			<td>청구금액<br> <small>10원미만 절사</small></td>
+							  			<td>15,090 원 <br> <small>전기요금계 &#43; 부가가치세 &#43; 전력산업기반기금</small></td>
+							  		</tr>
+							  	</tbody>
+							</table>
+					  	</div>
+					  	<div id="menu2" class="tab-pane fade">
+						    <h4>1. 아파트 전기요금제도</h4>
+						    <p><small>&#8728; 아파트는 전기사용 용도가 단독주택과 같은 주거용 요금 적용 <br> (기본공급약관 제 56조)</small></p>
+						    <hr>
+						    <h4>2. 아파트 계약방법</h4>
+						    <p><small>&#8728; 공급전압에 따라 아래와 같이 3가지로 구분하여 전기사용계약 방법을 결정</small></p>
+						    <p><small>&#8728; 호별계약의 경우 순수 주거부분의 계약전력이 500kW이상일 경우에는 고압이상으로 전기를 공급하되 고객(기설 고압공급아파트는 입주자 전원)이 희망할 경우 공급.</small></p>
+					  		<hr>
+					  		<h4>3. 주택용 고압 저압요금표</h4>
+						  	<table class="table pricing">
+							    <thead>
+							      	<tr>
+							        	<th colspan="2">기본요금(원/호)</th>
+							        	<th colspan="2">전력량요금(원/kWh)</th>
+							      	</tr>
+							    </thead>
+							    <tbody>
+							      	<tr>
+							        	<th>사용량 구간</th>
+								        <th>요금</th>
+								        <th>사용량 구간</th>
+								        <th>요금</th>
+							      	</tr>
+							      	<tr>
+								        <td>100kWh이하</td>
+								        <td>410</td>
+								        <td>100kWh 까지</td>
+								        <td>57.6</td>
+							      	</tr>
+							      	<tr>
+								        <td>101~200kWh</td>
+								        <td>730</td>
+								        <td>다음 100kWh</td>
+								        <td>98.9</td>
+							      	</tr>
+							      	<tr>
+								        <td>201~300kWh</td>
+								        <td>1,260</td>
+								        <td>다음 100kWh</td>
+								        <td>147.3</td>
+								    </tr>
+							      	<tr>
+								        <td>301~400kWh</td>
+								        <td>3,170</td>
+								        <td>다음 100kWh</td>
+								        <td>215.6</td>
+							      	</tr>
+							      	<tr>
+								        <td>401~500kWh</td>
+								        <td>6,060</td>
+								        <td>다음 100kWh</td>
+								        <td>325.7</td>
+							      	</tr>
+							      	<tr>
+								        <td>500kWh 초과</td>
+								        <td>10,760</td>
+								        <td>다음 100kWh</td>
+								        <td>574.6</td>
+							      	</tr>
+							    </tbody>
+							</table>
+						    <hr>
+						    <h4>4. 아파트 전기사용계약 종류 및 계산예시</h4>
+							<div class="pricingtabs apt">
+								<ul class="nav nav-tabs nav-justified">
+							      <li class="active"><a data-toggle="tab" href="#single" class="text-center">호별계약</a></li>
+							      <li class=""><a data-toggle="tab" href="#indepen" class="text-center">단일계약</a></li>
+							      <li class=""><a data-toggle="tab" href="#total" class="text-center">종합계약</a></li>
+							  	</ul>
+							  	<div class="tab-content">
+							    	<div id="single" class="tab-pane active">
+						    			<p>&#8728; <small>아파트의 독립된 각 1호에 대하여 저압으로 전기를 공급하는 고객에게 적용</small></p>
+						    			<hr>
+						    			<h4>4-1. 전기요금 계산예시 </h4>
+						    			<h5><strong> &nbsp;&nbsp;- 계산조건</strong></h5>
+						    			<p>&#8728; <small>주택용전력 저압요금 계산방식과 동일</small><br>
+						    			&#8728; <small>공동사용설비 요금의 경우, 호별로 계산. </small></p>
+							    	</div>
+							    	<div id="indepen" class="tab-pane">
+										<p><small>1. 전체 사용전력량 / 적용대상 호수 = 평균사용량 산출<br> &nbsp;&nbsp;&nbsp;&nbsp;(전체 사용전력량에는 공동설비 사용량을 포함)</small></p>
+										<p><small>
+							    		2. 해당 평균사용량의 기본요금 및 전력량요금 &#215; 적용대상 호수 = 전체 기본요금 및 전력량요금<br>&nbsp;&nbsp;&nbsp;&nbsp;(평균 사용량에 해당하는 요금단가 적용)</small></p>
+							    		<p><small>
+							    		3. 전체 기본요금 및 전력량요금 / 적용대상 호수 <br>&nbsp;&nbsp;&nbsp;&nbsp;= 세대별 전기요금
+							    		</small></p>
+							    		<hr>
+						    			<h4>4-1. 전기요금 계산예시 </h4>
+									  	<h5><strong> &nbsp;&nbsp;- 계산조건</strong></h5>
+										<ul class="list-unstyled">
+										  	<ul>
+										  		<li>주택용 고압요금 적용</li>
+												<li>계약전력 270kW, 세대수 10세대, 공급전압 22.9kV</li>
+												<li>최대수요전력 현황 : 요금적용전력 100kW</li>
+												<li>월간 전체 APT 전기사용량 : 3,000kWh <br> &nbsp;&nbsp;-세대별 사용량 : 2,340kWh</li>
+									  		</ul>
+										</ul>
+										<table class="table table-striped table-condensed">
+										  	<thead>
+											  	<tr>
+											  		<td class="col-xs-1">#</td>
+											  		<td class="col-xs-2">항목</td>
+											  		<td class="col-xs-4">계산</td>
+											  	</tr>
+										  	</thead>
+										  	<tbody>
+										  		<tr>
+										  			<td>1</td>
+										  			<td>평균사용량</td>
+										  			<td>300 kWh <br> <small>3,000kWh/10세대</small></td>
+										  		</tr>
+										  		<tr>
+										  			<td>2</td>
+										  			<td>기본요금 <br><small>원미만 절사</small></td>
+										  			<td>12,600 원<br><small>고압 2단계 기본요금 &#215; 10세대</small></td>
+										  		</tr>
+										  		<tr>
+										  			<td>3</td>
+										  			<td>전력량요금<br><small>원미만 절사</small></td>
+										  			<td>303,800 원 <br>
+														<small>&#8728; 1단계 요금 : 100kWh × 57.60원/kWh &#215; 10세대 = 57,600원</small><br><small>&#8728; 2단계 요금 : 100kWh × 98.90원/kWh &#215; 10세대 = 98,900원</small><br><small>&#8728; 3단계 요금 : 100kWh × 147.30원/kWh &#215; 10세대 = 147,300원</small>
+									  				</td>
+										  		</tr>
+										  		<tr>
+										  			<td>4</td>
+										  			<td>전기요금 계</td>
+										  			<td>316,400 원 <br>
+											  			<small>기본요금 &#43; 전력량요금</small>
+										  			</td>
+										  		</tr>
+										  		<tr>
+										  			<td>5</td>
+										  			<td>부가가치세 <br> <small>원미만 4사 5입</small></td>
+										  			<td>31,640 원 <br> <small>316,400 원 &#215; 10%</small>
+										  			</td>
+										  		</tr>
+										  		<tr>
+										  			<td>6</td>
+										  			<td>전력산업기반기금 <br> <small>10원미만 절사</small></td>
+										  			<td>117,068 원 <br> <small>316,400 원 &#215; 3.7%</small></td>
+										  		</tr>
+										  		<tr>
+										  			<td>7</td>
+										  			<td>청구금액<br> <small>10원미만 절사</small></td>
+										  			<td>46,510 원 <br> <small>(전기요금계 &#43; 부가가치세 <br>&#43; 전력산업기반기금)/적용대상 호수</small></td>
+										  		</tr>
+										  	</tbody>
+										</table>
+										&#187; 이상의 청구금액이 세대별 청구요금으로써 호별로 부과되는 요금. 
+
+							    	</div>
+							    	<div id="total" class="tab-pane">
+							    		<p><small>1. 아파트 1구내에 고압 이상의 전압으로 전기를 공급</small></p>
+							    		<p><small>2. 세대별 사용량은 단독주택과 동일하게 주택용 저압요금을 적용</small></p>
+							    		<p><small>3. 공동설비 사용량은 일반용(갑) 고압요금을 적용하여 요금을 계산하는 방법</small></p>
+						    			<hr>
+										<h4>4-1. 전기요금 계산예시 </h4>
+									  	<h5><strong> &nbsp;&nbsp;- 계산조건</strong></h5>
+										<ul class="list-unstyled">
+										  	<ul>
+										  		<li>주택용 고압요금 적용</li>
+												<li>계약전력 270kW, 세대수 10세대, 공급전압 22.9kV</li>
+												<li>최대수요전력 현황 : 요금적용전력 100kW</li>
+												<li>월간(2월) 전체 APT 전기사용량 : 3,000kWh <br> &nbsp;&nbsp;-세대별 사용량 : 2,340kWh</li>
+												<li>공동사용설비 요금적용 단가 : 일반용(갑)| 고압A 적용(선택Ⅱ요금인 경우)</li>
+									  		</ul>
+										</ul>
+										<table class="table table-striped table-condensed">
+										  	<thead>
+											  	<tr>
+											  		<td class="col-xs-1">#</td>
+											  		<td class="col-xs-2">항목</td>
+											  		<td class="col-xs-4">계산</td>
+											  	</tr>
+										  	</thead>
+										  	<tbody>
+										  		<tr>
+										  			<td>1</td>
+										  			<td>세대별 청구요금</td>
+										  			<td><small>주택용 저압요금 적용 개별호수 계산</small></td>
+										  		</tr>
+										  		<tr>
+										  			<td>2</td>
+										  			<td colspan="2">공동사용설비 요금 <!-- 계산<br> --> &nbsp; - <small>일반용(갑) 고압요금 적용</small></td>
+										  		</tr>
+										  		<tr>
+										  			<td>2-1</td>
+										  			<td>공동설비 사용량</td>
+										  			<td>660kWh <br>
+										  			 	<small>3,000kWh - 2,340kWh</small> <br>
+										  			 	<small>전체사용량 - 세대별사용량</small>
+									  				</td>
+										  		</tr>
+										  		<tr>
+										  			<td>2-2</td>
+										  			<td>요금적용전력</td>
+										  			<td>22kW <br>
+											  			&#8728; <small>100kW (660kWh/3,000kWh)</small> <br>
+											  			&#8728; <small>요금적용전력 &#215; (공동설비 사용량 / 전체사용량)</small>
+										  			</td>
+										  		</tr>
+										  		<tr>
+										  			<td>2-3</td>
+										  			<td>요금 <!-- <br> <small>일반용(갑) 고압요금 적용</small> --></td>
+										  			<td>245,938원 <br>&#8728; <small> 기본요금 : 22kW &#215; 8,230원/kW = 181,060원</small><br>&#8728; <small> 사용량요금 : 660kWh &#215; 98.3원/kWh(겨울철 요금-2월) = 64,878원</small>
+										  			</td>
+										  		</tr>
+										  		<tr>
+										  			<td>3</td>
+										  			<td>공동사용설비 전기요금 계</td>
+										  			<td>518,491 원 <br>&#8728; <small> 요금적용전력 &#43; 요금 </small></td>
+										  		</tr>
+										  		<tr>
+										  			<td>
+										  				4
+										  			</td>
+										  			<td colspan="2">
+										  				세대별 전기요금계 계산
+										  			</td>
+										  		</tr>
+										  		<tr>
+										  			<td>4-1</td>
+										  			<td>세대별 청구금액 <!-- <br> <small>10원미만 절사</small> --></td>
+										  			<td>46,510 원 <br> &#8728; <small>세대별 청구요금 &#43; 세대별 공동사용설비 요금</small><br>&#8728; <small> 세대별 공동사용설비 전기요금  = 공동사용설비 전기요금 계 / 적용대상 호수</small></td>
+										  		</tr>
+										  	</tbody>
+										</table>
+										&#187; 이상의 청구금액이 세대별 청구요금으로써 호별로 부과되는 요금.
+							    	</div>
+							  	</div>
+						  	</div>
+					  	</div>
+					  	<div id="menu3" class="tab-pane fade">
+						  	<h4>1. 전기요금 복지할인 현황 </h4>
+						  	<p>&#8728; 대상 - 주거용 주택용 사용가구 <small>(단, 사회복지시설은 일반용 포함)</small></p>
+								<div class="panel-group welfaregroup" id="accordion" role="tablist" aria-multiselectable="true">
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="headingOne">
+								      <h4 class="panel-title">
+								        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								          장애인
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>"장애인복지법"에서 정한 1~3급 장애인</small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 정액(월 8천원 한도)</small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="headingTwo">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								          국가유공자
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>"국가유공자등예우 및 지원에 관한 법률"에서 정한 1~3급 상이자</small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 정액(월 8천원 한도)</small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="headingThree">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								          상이유공자
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>"5.18민주유공자예우에 관한 법률"에서 정한 1~3급 상이자</small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 정액(월 8천원 한도)</small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="heading4">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+								          기초생활수급자 
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>"국민기초생활보장법"에서 정한 수급자</small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 정액(생계·의료급여수급자 월 8천원, 주거·교육급여수급자 월 4천원 한도)</small></li>
+								          <li class="list-group-item"><small>심야 전기요금 할인 - 갑 31.4%, 을 20%</small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="heading5">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+								          독립유공자
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>"독립유공자 예우에 관한 법률"에 의한 독립유공자 또는 유족 중 선순위자</small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 정액(월 8천원 한도)</small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="heading6">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+								          사회복지시설
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>사회복지사업법에 의한 사회복지시설, 다만 다음 법령에 해당하는 복지시설은 제외</small></li>
+								          <li class="list-group-item"><small> <ul class="list-unstyled"><ul><li>노인복지법 제32조의 제1항 제3호의 노인복지주택</li><li>노인복지법 시행규칙 제14조 제1항 제1호 라목의 유료양로시설</li><li>노인복지법 시행규칙 제18조 제1항 제1호 라목의 유료노인요양시설</li><ul><li>-입소자에게 분양 또는 임대한 시설이거나, 입소자로부터 입소비용 전부를 수납하여 운영하는 시설</li></ul></ul></ul></small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 21.6% <br> 일반용 전기요금 할인 - 20% <br> 심야전력 전기요금 할인 - 갑 31.4%, 을 20%</small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="heading7">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+								          차상위계층
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>"국민기초생활법"에서 정한 차상위계층으로 다음 법령에 따라 지원받는 자. 단, 심야는 차상위계층 전체 적용</small></li>
+								          <li class="list-group-item"><small> <ul class="list-unstyled"><ul><li>국민기초생활보장법 제9조 제5항</li><li>국민건강보험법 시행령 별표2 제3호 라목</li><li>장애인복지법 제49조, 제50조</li><li>한부모가족지원법 제5조(소득인정액이 최저생계비의 100분의 130 이하인자 포함)</li><li>우선돌봄 차상위자</li></ul></ul></small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 21.6% <br> 일반용 전기요금 할인 - 20% <br> 심야전력 전기요금 할인 - 갑 31.4%, 을 20%</small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="heading8">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+								          3자녀이상가구
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>"자(子)" 3인 이상 또는 "손(孫)" 3인 이상 가구</small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 한단계 낮은 요율(월 1만2천원 한도) </small></li>
+								        </ul>
+								    </div>
+								  </div>
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="heading9">
+								      <h4 class="panel-title">
+								        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+								          생명유지 장치
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+								        <ul class="list-group">
+								          <li class="list-group-item"><small>호흡기장애, 희귀난치성질환으로 산소발생기 등 생명유지장치를 사용하는 가구</small></li>
+								          <li class="list-group-item"><small>주택용 전기요금 할인 - 한단계 낮은 요율(301~600kWh, 한도없음) </small></li>
+								        </ul>
+								    </div>
+								  </div>
+								</div>
+							<hr>
+							<h4> 2. 출처 및 URL</h4>
+								<ul class="list-unstyled">
+									<li>
+										<p> &#8728; 주거용 복지할인 및 적용기준 - <small><a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/H/C/CYHCHP00208.jsp" target="_blank"> 바로가기</a></small></p>
+									</li>
+									<li>
+										<p> &#8728; 복지할인 현황 - <small><a href="http://cyber.kepco.co.kr/ckepco/front/jsp/CY/H/C/CYHCHP00107.jsp" target="_blank"> 바로가기</a></small></p>
+									</li>
+									<li>
+										<p> &#8728; 대가족·생명유지장치 요금제 상세설명 - <small><a href="http://cyber.kepco.co.kr/ckepco/front/jsp/CY/H/C/CYHCHP00209.jsp" target="_blank">바로가기</a></small></p>
+									</li>
+									<li>
+										<p> &#8728; 복지할인 혜택 신청에 대한 게시물 (한국전력) - <small><a href="http://blog.kepco.co.kr/202" target="_blank">바로가기</a></small></p>
+									</li>
+								</ul>
+							<hr>
+							<h4> 3. 복지혜택 외의 정보</h4>
+								<ul class="list-unstyled">
+									<p> &#8728; 전기요금 검침 및 납기일 - <small><a href="http://cyber.kepco.co.kr/ckepco/front/jsp/CY/H/C/CYHCHP00110.jsp" target="_blank">바로가기</a></small></p>
+								</ul>
+								<ul class="list-unstyled">
+									<p> &#8728; 하계 주택용 전기요금 할인제도 안내 - <small><a href="http://cyber.kepco.co.kr/ckepco/front/jsp/CY/A/B/CYABPP002.jsp?sn=21025562" target="_blank">바로가기</a></small></p>
+								</ul>
+								<ul class="list-unstyled">
+									<p> &#8728; 전기요금 할인 관련 카카오톡페이 청구서 안내 (200원 할인) - <small><a href="http://cyber.kepco.co.kr/ckepco/front/jsp/CY/A/B/CYABPP002.jsp?sn=21022996" target="_blank">바로가기</a></small></p>
+								</ul>
+					  	</div>
+					</div>
+				</div>
+			    <div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		      	</div>
+		    </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</article>
+	<script type="text/javascript">
+	    var _mfq = _mfq || [];
+	    (function() {
+	        var mf = document.createElement("script");
+	        mf.type = "text/javascript"; mf.async = true;
+	        mf.src = "//cdn.mouseflow.com/projects/ce8e3354-7490-4383-8d4d-95505cd70401.js";
+	        document.getElementsByTagName("head")[0].appendChild(mf);
+	    })();
+	</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-88385445-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
+</html>
