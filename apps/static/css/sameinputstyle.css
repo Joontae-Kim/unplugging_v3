@@ -1,0 +1,371 @@
+@media only screen and (min-width: 320px) and (max-width: 359px) { 
+/* input radio css style */
+  input[type="radio"] {
+      margin: 1px 0 0;
+      margin-top: 1px \9;
+      line-height: normal;
+  }
+
+  input[type="radio"] {  
+      display: none;  
+  }
+
+  input[type="radio"] + label{
+      display: inline-block;  
+      cursor: pointer;  
+      position: relative;  
+      padding-left: 16px;  
+      /*margin-right: 15px;*/
+      font-size: 13px;
+  }
+
+  input[type="radio"]+ label:before {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      left: -7px;
+      bottom: 2px;
+      background-color: #ccc;
+      border-radius: 10px;
+      box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  input[type="radio"] + label:active:before,
+  input[type="radio"]:checked + label:active:before  {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+
+  input[type="radio"]:checked + label:before {
+    background: #2f87c1;
+  }
+
+  input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top:7px;
+    left: -2px;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 10px white;
+  }
+
+  /* checkbox */
+  input[type="checkbox"] {
+    margin: 1px 0 0;
+    margin-top: 1px \9;
+    line-height: normal;
+  }
+
+  input[type="checkbox"] {  
+    display: none;
+  }
+
+  input[type="checkbox"] + label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4px;
+    margin-right: 1px;
+    font-size: 12px;
+  }
+
+  input[type="checkbox"]+ label:before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin-right: 10px;
+    position: absolute;
+    left: -17px;
+    bottom: 6px;
+    background-color: #ccc;
+    border-radius: 2px;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  input[type="checkbox"]:checked + label:before { 
+    content: "\0076";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+    background: #2f87c1;
+    text-align: center;
+    line-height: 12px;
+  } 
+
+  /* bxslider2 > input checkbox css style */
+  .typelist > .chklist > .checkbox {
+    margin-bottom: 15px;
+  }
+
+  .inslide_page > .typelist > span.group2 > .chklist div.checkbox{
+    margin-bottom: 15px;    
+  } 
+
+  .inslide_page > .typelist > span.group1 > .chklist div.checkbox{
+    margin-bottom: 15px;
+  }
+}
+
+/* bottom of the appliance calculate part  ||  width < 360 */
+/*@media only screen and (min-width: 320px) and (max-width: 359px) {
+}*/
+
+
+/*Mobile Device (col-xs) 360 | 375 | 414 */
+/*@media only screen and (min-width: 360px) and (max-width: 481px) {*/
+@media only screen and (min-width: 360px) and (max-width: 599px) {
+  input[type="radio"] {  
+      display: none;  
+  }
+
+  /* radio */
+  input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+  }
+
+  input[type="radio"] + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  input[type="radio"] + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    /*top: 1px;*/
+    top: 2px;
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    background: #ccc; 
+    border: none;
+    border-radius: 100%;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  input[type="radio"] + label:active:before,
+  input[type="radio"]:checked + label:active:before  {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+
+  input[type="radio"]:checked + label:before {
+    background: #2f87c1;
+  }
+
+  input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    /*top: 6px;*/
+    top: 7px;
+    left: 5px;
+    width: 7px;
+    height: 7px;
+    background: white;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 10px white;
+  }
+
+  /*slide_page2*/
+  /* input checkbox css style */
+  input[type="checkbox"] {
+    margin: 1px 0 0;
+    margin-top: 1px \9;
+    line-height: normal;
+  }
+
+  input[type="checkbox"] {  
+    display: none;  
+  }
+
+  input[type="checkbox"] + label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 12px;
+    margin-right: 0px;
+    font-size: 13px;
+  }
+
+  input[type="checkbox"]+ label:before {
+    content: "";  
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;  
+    position: absolute;
+    left: -9px;
+    background-color: #ccc;
+    border-radius: 2px;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  input[type=checkbox]:checked + label:before { 
+    content: "\0076";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    background: #2f87c1;
+    text-align: center;
+    line-height: 14px;
+    padding-left: 0.05em;
+  }
+
+  /* bxslider2 > input checkbox css style */
+  .typelist > .chklist > .checkbox {
+    margin-bottom: 15px;
+  }
+
+  .inslide_page > .typelist > span.group2 > .chklist div.checkbox{
+    margin-bottom: 15px;    
+  } 
+
+  .inslide_page > .typelist > span.group1 > .chklist div.checkbox{
+    margin-bottom: 15px;
+  }
+}
+
+@media only screen and (min-width: 600px){ 
+  input[type="radio"] {  
+      display: none;  
+  }
+
+  /* input radio css style */
+  input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+  }
+
+  input[type="radio"] + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    font-size: 1.5rem;
+    font-weight: 100;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  input[type="radio"] + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    background: #ccc; 
+    border: none;
+    border-radius: 100%;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  input[type="radio"] + label:active:before,
+  input[type="radio"]:checked + label:active:before  {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+  input[type="radio"]:checked + label:before {
+    /*background: #E9ECEE;*/
+    background: #2f87c1;
+    /*border-color: #adb8c0; */
+  }
+  input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 5px;
+    width: 7px;
+    height: 7px;
+    /*background: #99a1a7;*/
+    background: white;
+    border-radius: 100%;
+    /*box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);*/
+    box-shadow: inset 0px 0px 10px white;
+  }
+
+  /*slide_page2*/
+  /* input checkbox css style */
+  input[type="checkbox"] {
+    margin: 1px 0 0;
+    margin-top: 1px \9;
+    line-height: normal;
+  }
+
+  input[type="checkbox"] {  
+    display: none;  
+  }
+
+  input[type="checkbox"] + label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 12px;
+    margin-right: 0px;
+    font-size: 13px;
+  }
+
+  input[type="checkbox"]+ label:before {
+    content: "";  
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;  
+    position: absolute;
+    /*left: -7px;*/
+    left: -9px;
+    /*bottom: 8px;*/
+    background-color: #ccc;
+    border-radius: 2px;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  input[type="checkbox"]:checked + label:before { 
+    content: "\0076";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    background: #2f87c1;
+    text-align: center;
+    line-height: 15px;
+  }
+
+  /* bxslider2 > input checkbox css style */
+  .typelist > .chklist > .checkbox {
+    margin-bottom: 15px;
+  }
+
+  .inslide_page > .typelist > span.group2 > .chklist div.checkbox{
+    margin-bottom: 15px;    
+  } 
+
+  .inslide_page > .typelist > span.group1 > .chklist div.checkbox{
+    margin-bottom: 15px;
+  }
+}
