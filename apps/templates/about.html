@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>우리집 전기세 소개 | 가정용 전기요금 계산 및 분석 서비스</title>
+    <meta charset="UTF-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Joontae Kim">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="우리집 전기세는 가전제품 데이터 기반의 가정용 전기요금 계산 및 분석 서비스입니다.">
+    <meta name="keywords" content="전기요금, 전기세, 전기요금 계산기, 가정용 전기요금, 우리집 전기요금, 우리집 전기세, 가정용 전기세, 한국전력 전기요금 계산기, 가전제품, 냉장고, 에어컨">
+    <meta name="author" content="Joontae Kim">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="우리집 전기세 소개 | 가정용 전기요금 계산 및 분석 서비스">
+    <meta property="og:description" content="우리집 전기세는 가전제품 데이터 기반의 가정용 전기요금 계산 및 분석 서비스입니다.">
+    <meta property="og:image" content="../static/img/logo.png">
+    <meta property="og:url" content="http://unpluging.com/about">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="../static/bootstrap3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+    <link href="../static/css/aboutlay.css" media="screen and (min-width: 768px)" rel="stylesheet">
+    <link href="../static/css/aboutmobilelay.css" media="screen and (min-width: 320px) and (max-width: 767px)" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/faqnav.css">
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../static/bootstrap3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/userPassscript.js"></script>
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="ie8.css" />
+        <script type="text/javascript" src="selectivizr.js"></script>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+        <nav class="navbar navbar-default"> 
+          <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <img alt="Brand" class="logo" src="../static/img/logo.png" width="110rem">
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#caltype"><i style="font-size:2.0rem" class="fa">&#xf080;</i> 전기요금 계산하기</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown loginmenu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span id="accDrop"></span> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a target="_self" type="button" id="loginstatus" title="우리집 전기세 로그인">로그인 중</a></li>
+                    <li><a href="/passwordreset">비밀번호 관리</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/result">계산결과 보러가기</a></li>
+                  </ul>
+                </li>
+                <li><a target="_self" type="button" id="logoutstatus" title="우리집 전기세 로그인">로그인</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+    </header>
+    <article>
+        <header>
+            <div class="col-lg-offset-1 col-lg-10 col-xs-offset-1 col-xs-10 text-center about_header">
+                <img src="../static/img/logo.png" class="col-lg-offset-4 col-lg-4 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-offset-0 col-xs-12 title_logo"/>
+                <div class="col-lg-12 col-xs-12">
+                    <h2><strong>자주 묻는 질문</strong></h2>
+                </div>
+            </div>
+            <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                <hr class="header_hr">
+            </div>
+        </header>
+        <article>
+            <!-- <div class="row"> -->
+            <div class="">
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <div class="col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-12 col-xs-offset-0 col-xs-12 howTo_subtitle">
+                        <h2>1. 기본질문</h2>
+                    </div>
+                    <div class="col-lg-9 col-xs-12 question_contents">
+                        <div class="col-lg-12">
+                                <h3>Q : 우리집 전기세는 무엇인가요?</h3>
+                                <p>A : 안녕하세요, 우리집 전기세는 전기요금 계산 및 가전제품 셀프 분석 서비스인 '우리집 전기요금 계산기'를 제공하고 있는 1인 프로젝트입니다. 우리는 가전제품의 에너지 효율성과 전기요금 계산기를 통해 단순하지만, 직관적이고 보다 쉽게 전기요금을 예측해보며 '낭비성 에너지 소비습관', '현명한 가전제품 구매 및 사용'에 대한 답을 찾아보고자 모든 역량을 기울이고 있습니다.</p>
+                            <hr class="question_hr">
+                                <h3>Q : 우리집 전기세의 시작은?</h3>
+                                <p>A : 우리집 전기세는 직접 경험한 전기요금 폭탄에 대한 충격과 공포의 산물로서, "우리집에서 가전제품을 얼마나 사용하는지 안다면 요금을 조절할 수 있지 않을까?"라는 고민에서 시작하게 되었습니다.</p>
+                            <hr class="question_hr">
+                                <h3>Q : 전기세는 맞는 용어인가요?</h3>
+                                <p>A : 정확한 용어적 정의로서는 '세금'보다는 '요금'이 맞지만, 국립국어원에서는 '전기세'를 국어사전에 등재하였습니다.</p>
+                                <ul>
+                                    <li>세금 : 국가를 유지하고 국민 생활의 발전을 위해 국민들의 소득 일부분을 국가에 남부하는 돈.</li>
+                                    <li>요금 : 사물을 사용ㆍ소비ㆍ관람한 대가로 치르는 돈</li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <hr>
+                </div>
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <div class="col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-12 col-xs-12 howTo_subtitle">
+                        <h2>2. 우리집 전기요금 계산기</h2>
+                    </div>
+                    <div class="col-lg-9 col-xs-12 question_contents">
+                        <div class="col-lg-12 col-xs-12">
+                                <h3>Q : '우리집 전기요금 계산기'는 무엇인가요?</h3>
+                                <p class="guide">A : 우리집 전기요금 계산기는 가전제품 데이터 기반의 전기요금 계산 및 가전제품 사용 자가진단 서비스로서, 단 하나의 계산기로 계절별 예상요금과 가전제품 사용패턴 분석 보고서를 받아보실 수 있습니다. 또한, 본 계산기의 요금은 예상요금임을 알려드리는 바이며 보다 정확한 전기요금을 계산할 수 있도록 노력하겠습니다. </p>
+                            <hr class="question_hr">
+                                <h3>Q : '우리집 전기요금 계산기'는 어떻게 사용하나요? </h3>
+                                <p class="guide">A : 우리집 전기세는 총 3 단계로 자세한 사용방법은 아래와 같습니다.</p>
+                                <!-- carousel for how to use -->
+                                <div id="carousel-example-generic" id="guide_carousel" class="carousel slide" data-ride="carousel">
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item active">
+                                            <div class="carousel-content">
+                                                <div class="col-lg-12 col-xs-12 guide_pc">
+                                                    <h3 class="text-center">1단계 : 요금정보 선택 <small>요금계산 필수정보 선택</small> </h3>
+                                                    <div class="col-lg-7 col-md-7 text-center">
+                                                        <img class="description_img" src="../static/img/part1.png">
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 description_wrapper">
+                                                        <h4 class="description_title text-center"><strong>설명</strong></h4>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10102;</span></strong> 주거형태</h4>
+                                                            <p>적용 계약전력 정보를 불러오기 위한 필수사항입니다.</p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10103;</span></strong> 가족수</h4>
+                                                            <p>가족수에 따른 가전제품 목록을 불러오기 위한 필수사항입니다.</p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10104;</span></strong> 복지할인 및 가족할인</h4>
+                                                            <p class="">복지할인 또는 대가족, 다자녀 가구 등의 할인혜택을 적용하실 수 있습니다.</p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents2">
+                                                            <h4><strong><span class="rounded_number">&#10105;</span></strong> 선택완료 버튼</h4>
+                                                            <p>필수사항인 주거형태와 가족수 모두 선택해주시면 다음 단계로 넘어가실 수 있습니다.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="guide_mobile">
+                                                    <img class="description_img col-xs-12" src="../static/img/howTo_mobile_part1.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="carousel-content">
+                                                <div class="col-lg-12 col-xs-12 guide_pc">
+                                                    <h3 class="text-center">2단계 : 가전제품 카테고리 <small>카테고리별 가전제품 선택.</small> </h3>
+                                                    <div class="col-lg-7 col-md-7 text-center">
+                                                        <img class="description_img" src="../static/img/part2.png">
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 description_wrapper">
+                                                        <h4 class="description_title text-center"><strong>설명</strong></h4>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10102;</span></strong> 가전제품 카테고리</h4>
+                                                            <p>가전유형에 따라 필수가전, 부수가전, 계절가전으로 구분하였습니다.</p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10103;</span></strong> 가전제품 선택</h4>
+                                                            <p>선택한 가전제품은 바둑의&nbsp;<span style="background-color:#484848;color:white;">&nbsp;흙돌&nbsp;</span>&nbsp;과 같이 표시된 것입니다.</p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10104;</span></strong> 총 선택개수</h4>
+                                                            <p>각 가전유형의 총 사용선택 개수 입니다.</p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents2">
+                                                            <h4><strong><span class="rounded_number">&#10105;</span></strong> 선택완료 버튼</h4>
+                                                            <p>사용 가전제품을 모두 선택해주신 후 마지막 3 단계로 넘어가시면 됩니다.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="guide_mobile">
+                                                    <img class="description_img col-xs-12" src="../static/img/howTo_mobile_part2.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="carousel-content">
+                                                <div class="col-lg-12 col-xs-12 guide_pc">
+                                                    <h3 class="text-center">3단계 : 사용시간 선택 <small>제품유형, 사용주기, 사용시간 선택.</small> </h3>
+                                                    <div class="col-lg-7 col-md-7 text-center">
+                                                        <img class="description_img" src="../static/img/part3.png">
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 description_wrapper">
+                                                        <h4 class="description_title text-center"><strong>설명</strong></h4>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10102;, &#10103;</span></strong> 제품명, 제품유형</h4>
+                                                            <p>제품명과 각 제품의 유형입니다. 해당 제품의 유형을 선택해주세요.</p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10104;</span></strong> 사용주기 및 시간</h4>
+                                                            <p>'매일 매일' 또는 '일주일 동안', '한달동안'에 '몇 시간' 사용하시는지에 따라 사용주기를 선택해주시면 됩니다. </p>
+                                                        </div>
+                                                        <div class="col-lg-12 description_contents">
+                                                            <h4><strong><span class="rounded_number">&#10105;</span></strong> 계산공식 및 사용버튼</h4>
+                                                            <p>제품별 전력소비량과 요금에 대한 계산공식이며 사용버튼을 누르시면 자동으로 계산됩니다.</p>
+                                                        </div>                                          
+                                                        <div class="col-lg-12 description_contents2">
+                                                            <h4><strong><span class="rounded_number">&#10106;, &#10107;</span></strong> 선택제품 보기</h4>
+                                                            <p>선택 제품목록을 보기 및 선택취소를 하실 수 있으며, <large> &#10107;</large>을 누르시면 다음 제품으로 넘어가실 수 있습니다.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="guide_mobile">
+                                                    <img class="description_img col-xs-12" src="../static/img/howTo_mobile_part3.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <a class="row left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="row right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            <!-- </div> -->
+                            <!-- carousel for how to use -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <hr>
+                </div>
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <div class="col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-12 col-xs-12 howTo_subtitle">
+                        <h2>3. 가전제품 데이터</h2>
+                    </div>
+                    <div class="col-lg-9 col-xs-12 question_contents">
+                        <div class="col-lg-12 col-xs-12">
+                                <h3>Q : 가전제품은 몇 가지나 있나요?</h3>
+                                <p class="guide">A : 우리집 전기요금 계산기는 총 가전제품 : 22가지, 세부 제품유형 : 92가지로 분류 되어있습니다.</p>
+                            <hr class="question_hr">
+                                <h3>Q : 가전제품 데이터이 어떻게 활용되는지 궁금합니다!</h3>
+                                <p class="guide">A : 각 제품의 데이터는 제조사, 온라인 판매회사, 가전제품 관리 및 감독기관을 대상으로 크로스 체크를 시행하였으며, 가전제품 데이터를 활용하기 위해 총 다섯 가지 과정을 통해 재가공하였습니다.</p>
+                                <ul>
+                                    <li>첫째, 생산일자와 온라인 및 오프라인 시장에서의 판매여부 및 제품별 유통시장 반영.</li>
+                                    <li>둘째, 가전제품 전력소비 지표를 통한 데이터 재가공.</li>
+                                    <li>셋째, 가전제품 데이터 탐색을 통한 선택단위 정립.</li>
+                                    <li>넷째, 제품별 선택단위 데이터 탐색 및 오차 최소화를 위한 시나리오 구성.</li>
+                                    <li>다섯째, 시나리오별 검증 및 최소오차 시나리오 도출.</li>
+                                </ul>
+                            <hr class="question_hr">
+                                <h3>Q : 제품별 전력소비량의 오차는 어느정도 인가요?</h3>
+                                <p class="guide">A : 각 제품의 주력 제품유형에 있어서는 최소 1kW(월간 전력소비량 기준) 미만의 오차값을 유지하고자 노력하였습니다.</p>
+                            <hr class="question_hr">
+                                <h3>Q : 제품 업데이트 요청</h3>
+                                <p class="guide">A : 가전제품 데이터 및 종류 추가의 경우 요청 이외에도 지속적으로 제품 데이터를 추가 및 업데이트 할 예정이며, 요청이 있을 경우 우선적으로 반영하겠습니다!</p>
+                            <hr class="question_hr">
+                                <h3>Q : 서비스 API 제공여부</h3>
+                                <p class="guide">A : 현재는 개발 계획은 있으나 추후 '우리집 전기세'의 발전 방향 및 지속성의 여부에 따라 제공할 계획입니다. 함께 하실 의향이 있으시다면 페이지 하단의 지원팀 이메일 또는 문의하기를 통해 의견을 주시면 감사하겠습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <hr class="question_hr">
+                </div>
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <div class="col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-12 col-xs-12 howTo_subtitle">
+                        <h2>4. 추가질문</h2>
+                    </div>
+                    <div class="col-lg-9 col-xs-12 question_contents">
+                        <div class="col-lg-12 col-xs-12">
+                                <h3>Q : 추가질문을 하고싶어요!</h3>
+                                <p class="guide">A : 상단의 자주묻는 질문에 알고싶은 점 또는 묻고싶은 질문이 없으시다면 하단의 '문의하러 가기' 또는 지원팀으로 바로 이메일을 보내주시면 빠른 시일내로 답변 드리겠습니다. 감사합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12">
+                    <hr class="header_hr">
+                </div>
+            </div>
+        </article>
+    </article>
+    <footer class="container col-md-12 col-xs-12 footer navbar-bottom" id="contact">
+        <article>
+            <hr>
+            <address class="col-md-2 col-sm-4 col-xs-12">
+              <strong>우리집 전기세</strong><br>
+              서울시 강남구 논현동 277-27 502호 <br>하이브아레나 코워킹스페이스 
+            </address>
+            <address class="col-md-2 col-sm-4 col-xs-12">
+              <strong>지원팀</strong><br>
+              E-mail : support@unpluging.com<br>
+              <a href="https://goo.gl/forms/Pq0EUEDzMwMq9M013" target="_blank" style="text-decoration:none;">문의하러 가기&nbsp; <span class="glyphicon glyphicon-new-window"></span></a>
+            </address>
+            <address class="col-md-2 col-sm-4 col-xs-12">
+              <strong>도움말</strong><br> <a href="/about" target="_blank" style="text-decoration:none;">도움말 바로가기<span class="glyphicon glyphicon-new-window"></span></a>
+            </address>
+        </article>
+    </footer>
+    </footer>
+    <script type="text/javascript">
+        var _mfq = _mfq || [];
+        (function() {
+            var mf = document.createElement("script");
+            mf.type = "text/javascript"; mf.async = true;
+            mf.src = "//cdn.mouseflow.com/projects/ce8e3354-7490-4383-8d4d-95505cd70401.js";
+            document.getElementsByTagName("head")[0].appendChild(mf);
+        })();
+
+        // var sw = screen.width;
+        // if(sw < 768){
+        //   $('.footer').removeClass('navbar-fixed-bottom')
+        // } else (
+        //   $('.footer').addClass('navbar-fixed-bottom')
+        // )
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-88385445-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
+</html>
