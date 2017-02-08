@@ -1,0 +1,747 @@
+@font-face {
+    font-family: 'NotoSansKR-Regular';
+    src: url('../fonts/NotoSansKR-Regular.otf');
+}
+
+body{
+	font-family: 'NotoSansKR-Regular';
+	background-color: #F5F5F5;
+	overflow-y: hidden;
+}
+
+.page_frame{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}
+
+/* new component */
+.glyphicon-option-vertical{
+	margin-top: -20px;
+	font-size: 18px;
+	margin-right: 0.5em;
+}
+
+.btn_default{
+    cursor: pointer;
+    width: 10vw;
+    height: 10vh;
+    background:#ececec;
+    border: none;
+    color: #525252;
+    font-weight : 500;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 0.35rem; 
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.23), 0 0px 2px rgba(0,0,0,0.22);   
+}
+
+.btn_active{
+  	box-shadow: 0 3px 4px rgba(0,0,0,0.23), 0 1px 3px rgba(0,0,0,0.22);
+  	font-weight : 600;
+	color: black;
+  	background-color: #484848;
+  	color: white;
+  	outline:0;
+}
+
+.btn_default:focus,.btn_active:focus{
+	outline:0;	
+}
+
+.guide_pc{
+	display: none;
+}
+
+.guide_mobile{
+	display: initial;
+	margin: 0 auto;
+}
+
+.sorry{
+	word-break: keep-all;
+}
+
+.err + .tooltip > .tooltip-inner {
+    background-color: #E53935;
+    color: #FFFFFF;
+    word-break: keep-all;
+}
+
+.err + .tooltip.bottom > .tooltip-arrow {
+    border-bottom: 5px solid #E53935;
+}
+
+.popover-title {
+    background-color: #eaeaea;
+    text-align:center;
+}
+
+.popover-title > .pop_title{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+	.carousel-control.left,.carousel-control.right {
+		background-image: none;
+	}
+
+.carousel-content {
+    color:black;
+    display:flex;
+    align-items:center;
+    text-align: left;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 7%;
+    font-size: 20px;
+    color: #000000;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0);
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+.carousel-content h3{
+    border-bottom: 2px solid;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+/*Mobile Device (col-xs) 320 */
+@media only screen and (min-width: 320px) and (max-width: 359px) { 
+	.page_title{
+	    color: white;
+	    background-color: #1c8e21;
+        margin-bottom: 0.5em;
+        border-radius: 3px;
+  	  	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	}
+
+	.page_title h4{
+		margin-left: 0.5em;
+		padding: 10px 0 10px 0;
+	}
+
+	.glyphicon-exclamation-sign{
+		font-size: 0.8em;
+		color: white;
+		position: relative;
+		right: 1em;
+		top: 3px;
+	}
+
+	.form-group{
+		background-color: white;
+	}
+
+	.form-group .control-label{
+	    margin-top: 0.5em;
+	}
+
+	.form-horizontal hr{
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+    }
+
+	.house {
+	    margin-top: 10px;
+	    margin-bottom: 15px;
+	}
+
+	.family{
+	    margin-top: -10px;
+	    margin-bottom: -5px;	
+	}
+
+	.apt{
+		margin-top: -5px;
+	}
+
+	.wel_guide{
+		display: none;
+	}
+
+	.selwelfare2 .dropdown-menu {
+        left: -55px;
+	}
+
+	.slider_footer hr{
+	    width: 22.3em;
+	    margin-left: 1px;	    
+	}
+
+	.btn-success{
+	    color: white;
+	    background-color: #259b24;
+	}
+	
+	/* 가전제품 확인 탭 */
+	/* new version */
+	.nav-tabs.nav-justified {
+		margin-top: 0.5em;
+		border-bottom: 2px solid #e8e8e8;
+		position: relative;
+		text-align: center;
+		margin-bottom: 3px;
+	}
+
+	.nav-tabs > li, .nav-pills > li {
+	    position: initial;
+	    display: inline-block;
+	    zoom: 1;
+	    width: 32.5%;
+	    /*display:inline; /* ie7 fix */
+	    zoom: 1;
+	    /* hasLayout ie7 trigger */
+	    margin-bottom: -7px;
+	}
+
+	.nav-tabs.nav-justified>li>a {
+		color: #929292;
+	}
+
+	.nav-tabs.nav-justified>.active>a, 
+	.nav-tabs.nav-justified>.active>a:focus, 
+	.nav-tabs.nav-justified>.active>a:hover {
+		position: initial;
+		border-bottom: 0px solid;
+		background: transparent;
+		border: none;
+		color: #2e6da4;
+	    font-size: 14px;
+		font-weight: bold;
+		border-bottom: 2px solid #777;
+		border-radius: 0px; 
+	}
+
+	.tab-content {
+	    border: 2px solid #e8e8e8;
+        margin-top: -5px;
+	    margin-bottom: 7px;
+	    border-top: none;
+	    border-radius: 0px;
+      	text-align: center;
+      	border-radius: 0px 0px 2px 2px;
+	}
+
+	.menu_box1 ,.menu_box2 ,.menu_box3{
+	    padding: 1.0em 0;
+	    min-height: 276px;
+	}
+
+	.howmany h5{
+		font-weight: 300;
+	}
+
+	/* new component */
+	.btn_default{
+	    min-width: 71px;
+	    height: 75px;
+	    font-size: 13px;
+	    font-weight: 400;
+	}
+
+	.btn_active{
+	    font-size: 13px;
+	    color: white;
+	    font-weight: 400;
+	    letter-spacing: 0px;
+	}
+
+	/* 3rd slide - inside slide */
+	.slide_page2{
+		box-shadow: 0px 0px 1px rgba(136, 136, 136, 0.61);
+	}
+
+	.app_nm h4{
+	    margin-top: 0.3em;
+	    margin-bottom: 0.5em;
+	    margin-left: 0.0em;
+	}
+    
+    .typelist{
+        padding: 1px 3px 0 3px;
+	    text-align: -webkit-center;
+	}
+
+	.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	    display: inline-block;
+	    overflow: hidden;
+	    width: 100%;
+	    text-align: center;
+	}
+
+	#slidepass{
+		margin-top: 0.5em;
+	}
+
+	#checkupChoice{
+		display: none;
+        margin-top: -3px;
+	}
+
+	a:focus, a:hover {
+	    text-decoration: none;
+	}
+
+	.inslide_page > .typelist > span.group2{
+		margin-left: -3px;
+	}
+
+	.inslide_page > .typelist > span > h5.subtitle{
+	    margin-left: -1.5em;
+	    margin-top: 0.9em;
+	    margin-right: 0.0em;
+	}
+
+	/* same css */
+	.aptguide{
+	    padding-left: 18px;
+		padding-bottom: 15px;
+	}
+
+	#slidprev2{
+		visibility: hidden;
+		z-index: 1;
+	}
+}
+
+ /*Mobile Device (col-xs) 360 | 375 | 414 */
+@media only screen and (min-width: 360px) and (max-width: 399px) {
+	.page_title{
+	    color: white;
+	    background-color: #1c8e21;
+        margin-bottom: 0.5em;
+        border-radius: 3px;
+  	  	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	}
+
+	.page_title h4{
+	    margin-left: 0.5em;
+        padding: 10px 0 10px 0;
+	}
+
+	.glyphicon-exclamation-sign{
+		font-size: 0.8em;
+		color: white;
+	    position: relative;
+	    right: 1em;
+	}
+
+	.popover > .popover-title ,.popover-content{
+		color: black;
+	}
+
+	.form-group{
+		background-color: white;
+	}
+
+	.form-group .control-label{
+	    margin-top: 5px;
+	    word-break: keep-all;
+	}
+
+    .slide_body_hr{
+	    margin-top: -0.5em;
+	    margin-bottom: -0.5em;
+    }
+
+	.house{
+        margin-top: 20px;
+	    margin-bottom: 15px;
+	}
+
+	.family{
+	    margin-top: -10px;
+	    margin-bottom: -5px;	
+	}
+
+	.selwelfare2 .dropdown-menu {
+        left: -23%;
+	}
+
+	.aptguide{
+	    padding-left: 18px;
+		padding-bottom: 2.5em;
+	}
+
+	.slider_footer hr{
+	    width: 22.3em;
+	    margin-left: 1px;	    
+	}
+
+	.btn-success{
+	    color: white;
+	    background-color: #259b24;
+	}
+
+	/* 가전제품 확인 탭 */
+	.nav-tabs.nav-justified {
+		margin-top: 0.5em;
+		border-bottom: 2px solid #e8e8e8;
+		position: relative;
+		text-align: center;
+		margin-bottom: 3px;
+	}
+
+	.nav-tabs > li, .nav-pills > li {
+		/* new version */
+	    position: initial;
+	    display: inline-block;
+	    zoom: 1;
+	    width: 32.6%;
+	    /*display:inline; /* ie7 fix */
+	    zoom: 1;
+	    /* hasLayout ie7 trigger */
+        margin-bottom: -7px;
+	    /* new version */
+	}
+
+	.nav-tabs.nav-justified>li>a {
+		color: #929292;
+	}
+
+	.nav-tabs.nav-justified>.active>a, 
+	.nav-tabs.nav-justified>.active>a:focus, 
+	.nav-tabs.nav-justified>.active>a:hover {
+		position: initial;
+		border-bottom: 0px solid;
+		background: transparent;
+		border: none;
+		color: #2e6da4;
+		font-size: 18px;
+		font-weight: bold;
+		border-bottom: 2px solid #777;
+		border-radius: 0px;
+	}
+
+	.tab-content {
+		/* new version */
+	    border: 2px solid #e8e8e8;
+        margin-top: -5px;
+	    border-top: none;
+	    border-radius: 0px;
+      	text-align: center;
+      	border-radius: 0px 0px 2px 2px;
+	    /* new version */
+	}
+
+	.howmany h5{
+		font-weight: 300;
+	}
+
+	input[type=button]:focus { /* Code for Firefox */
+	    outline:0;
+	}
+
+	/* new component */
+	.btn_default{
+	    min-width: 75px;
+	    height: 75px;
+	    font-size: 14px;
+	    font-weight: 400;
+	}
+
+	.btn_active{
+	    font-size: 14px;
+	    color: white;
+	    font-weight: 400;
+	    letter-spacing: 0px;
+	}
+
+	.menu_box1 ,.menu_box2 ,.menu_box3{
+		padding: 1em;
+        min-height: 285px;
+	}
+	/* new component */
+
+	/* 3rd slide - inside slide */
+	.slide_page2{
+		box-shadow: 0px 0px 1px rgba(136, 136, 136, 0.61);
+	}
+
+	.typetitle h3{
+	    margin-top: -0.5em;
+	    margin-left: -0.5em;
+	    margin-bottom: 0.0em;
+	}
+
+	.app_nm h4{
+	    margin-top: 0.5em;
+	    margin-bottom: 0.5em;
+	    margin-left: 0.0em;
+	}
+    
+    .typelist{
+	}
+
+	.chk1{
+		margin-left: -0.7em;
+	}
+
+	.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	    display: inline-block;
+	    overflow: hidden;
+	    width: 100%;
+	    text-align: center;
+	}
+
+	#slidepass{
+		margin-top: 0.5em;
+	}
+
+	#checkupChoice{
+		display: none;
+        margin-top: -3px;
+	}
+
+	a:focus, a:hover {
+	    text-decoration: none;
+	}
+
+	/*.inslide_page > .typelist > span.group1{
+	    margin-left: 10px;
+	    margin-top: -9px;
+	}*/
+
+	.inslide_page > .typelist > span.group2{
+		margin-top: -2px;
+	}
+}
+
+/*@media only screen and (min-width: 400px) and (max-width: 480px) {*/
+@media only screen and (min-width: 400px) and (max-width: 599px) {
+	.page_title{
+	    color: white;
+	    background-color: #1c8e21;
+        margin-bottom: 0.5em;
+        border-radius: 3px;
+	}
+
+	.page_title h4{
+	    margin-left: 0.5em;
+        padding: 10px 0 10px 0;
+	}
+
+	.glyphicon-exclamation-sign{
+		font-size: 0.8em;
+		color: white;
+	    position: relative;
+	    right: 1em;
+	}
+
+	.popover > .popover-title ,.popover-content{
+		color: black;
+	}
+
+	.slide_page > .slide_header h5{
+	    margin-top: 2em;
+	    margin-bottom: -1.5em;
+	    line-height: 1.3em;
+	    font-weight: 400;
+	    font-size: 1.00em;
+	    word-break: keep-all;
+	}
+
+	.slide_header{
+	    margin-top: -0.5em;
+	}
+
+	.slide_header_hr{
+		margin-top: 15px;
+	}
+
+	.form-group{
+		background-color: white;
+	}
+
+	.form-group .control-label{
+	    margin-top: 0.5em;
+	}
+
+	.form-horizontal hr{
+    }
+
+    .slide_body_hr{
+	    margin-top: -0.5em;
+	    margin-bottom: -0.5em;
+    }
+
+	.house{
+		margin-top: 20px;
+	}
+
+	.family{
+	    margin-top: -10px;
+	}
+
+	.selwelfare2 .dropdown-menu {
+        left: -14%;
+	}
+
+	.aptguide{
+		padding-left: 18px;
+		padding-bottom: 2.5em;
+	}
+
+	.slider_footer hr{
+	    width: 22.3em;
+	    margin-left: 1px;	    
+	}
+
+	.btn-success{
+	    color: white;
+	    background-color: #259b24;
+	}
+
+	/* 가전제품 확인 탭 */
+	.nav-tabs.nav-justified {
+		margin-top: 0.5em;
+		border-bottom: 2px solid #e8e8e8;
+		position: relative;
+		text-align: center;
+		margin-bottom: 3px;
+	}
+
+	.nav-tabs > li, .nav-pills > li {
+		/* new version */
+	    position: initial;
+	    display: inline-block;
+	    zoom: 1;
+	    width: 32.6%;
+	    /*display:inline; /* ie7 fix */
+	    zoom: 1;
+	    /* hasLayout ie7 trigger */
+        margin-bottom: -7px;
+	    /* new version */
+	}
+
+	.nav-tabs.nav-justified>li>a {
+		/*color: #777;*/
+		color: #929292;
+	}
+
+	.nav-tabs.nav-justified>.active>a, 
+	.nav-tabs.nav-justified>.active>a:focus, 
+	.nav-tabs.nav-justified>.active>a:hover {
+		position: initial;
+		border-bottom: 0px solid;
+		background: transparent;
+		border: none;
+		color: #2e6da4;
+		font-size: 18px;
+		font-weight: bold;
+		border-bottom: 2px solid #777;
+		border-radius: 0px;
+	}
+
+	.tab-content {
+		/* new version */
+		border: 2px solid #e8e8e8;
+		margin-top: -5px;
+		border-top: none;
+		border-radius: 0px;
+		text-align: center;
+		border-radius: 0px 0px 2px 2px;
+	    /* new version */
+	}
+
+	.menu_box1 ,.menu_box2 ,.menu_box3{
+		padding: 1em;
+        min-height: 285px;
+	}
+
+	.appliance_check h5{
+	    font-size: 1.05em;
+	    line-height: 1.3em;
+	    text-align: center;
+	    font-weight: 400;
+	    margin-top: 1.5em;
+	    word-break: keep-all;
+	    margin-bottom: 1.0em;
+	}
+
+	input[type=button]:focus { /* Code for Firefox */
+	    outline:0;
+	}
+
+	/* new component */
+	.btn_default{
+	    min-width: 75px;
+	    height: 75px;
+	    font-size: 14px;
+	    font-weight: 400;
+	}
+
+	.btn_active{
+	    font-size: 14px;
+	    color: white;
+	    font-weight: 400;
+	    letter-spacing: 0px;
+	}
+
+	.howmany h5{
+		font-weight: 300;
+		margin-top: 2.0vh;
+	}
+
+	/* 3rd slide - inside slide */
+	.slide_page2{
+		margin-left: 4px;
+		box-shadow: 0px 0px 1px rgba(136, 136, 136, 0.61);
+	}
+
+	.typetitle h3{
+	    margin-top: -0.5em;
+	    margin-left: -0.5em;
+	    margin-bottom: 0.0em;
+	}
+
+	.app_nm h4{
+	    margin-top: 0.5em;
+	    margin-bottom: 0.5em;
+	    margin-left: 0.0em;
+	}
+    
+    .typelist{
+	}
+
+	.chk1{
+		margin-left: -0.7em;
+	}
+
+	.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	    display: inline-block;
+	    overflow: hidden;
+	    width: 100%;
+	    text-align: center;
+	}
+
+	#slidepass{
+		margin-top: 0.5em;
+	}
+
+	#checkupChoice{
+		display: none;
+        margin-top: -3px;
+	}
+
+	a:focus, a:hover {
+	    text-decoration: none;
+	}
+
+	.inslide_page > .typelist > span.group2{
+		margin-left: -3px;
+	}
+}
