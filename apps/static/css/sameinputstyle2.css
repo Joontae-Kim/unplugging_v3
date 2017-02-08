@@ -1,0 +1,223 @@
+/*@media only screen and (min-width: 320px) and (max-width: 359px) {}*/
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+/* input radio css style */
+  .slide_page2 input[type=radio] {  
+      display: none;  
+  }
+
+  .slide_page2 input[type=radio] {
+      margin: 1px 0 0;
+      margin-top: 1px \9;
+      line-height: normal;
+  }
+
+  .slide_page2 input[type=radio] + label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    margin-right: -1px;
+    font-size: 13px;
+  }
+
+  .slide_page2 input[type=radio]+ label:before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    background: #ccc; 
+    border: none;
+    border-radius: 100%;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  .slide_page2 input[type="radio"] + label:active:before,
+  .slide_page2 input[type="radio"]:checked + label:active:before  {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+  .slide_page2 input[type="radio"]:checked + label:before {
+      background: #2f87c1;
+  }
+
+  .slide_page2 input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 1px;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 10px white;
+  }
+}
+
+
+@media only screen and (min-width: 360px) and (max-width: 380px) {
+/* input radio css style */
+  .slide_page2 input[type=radio] {  
+      display: none;  
+  }
+
+  .slide_page2 input[type=radio] {
+      margin: 1px 0 0;
+      margin-top: 1px \9;
+      line-height: normal;
+  }
+
+  .slide_page2 input[type=radio] + label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 22px;
+    margin-right: 0px;
+    font-size: 13px;
+  }
+
+  .slide_page2 input[type=radio]+ label:before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    background: #ccc; 
+    border: none;
+    border-radius: 100%;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  .slide_page2 input[type="radio"] + label:active:before,
+  .slide_page2 input[type="radio"]:checked + label:active:before  {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .slide_page2 input[type="radio"]:checked + label:before {
+    background: #2f87c1;
+  }
+
+  .slide_page2 input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 10px white;
+  }
+}
+
+@media only screen and (min-width: 381px) and (max-width: 599px) {
+/* input radio css style */
+  .slide_page2 input[type=radio] {  
+      display: none;  
+  }
+
+  .slide_page2 input[type=radio] {
+      margin: 1px 0 0;
+      margin-top: 1px \9;
+      line-height: normal;
+  }
+
+  .slide_page2 input[type=radio] + label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 12px;
+    margin-right: 0px;
+    font-size: 13px;
+  }
+
+  .slide_page2 input[type=radio]+ label:before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    background: #ccc; 
+    border: none;
+    border-radius: 100%;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  .slide_page2 input[type="radio"] + label:active:before,
+  .slide_page2 input[type="radio"]:checked + label:active:before  {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+  .slide_page2 input[type="radio"]:checked + label:before {
+    background: #2f87c1;
+  }
+  .slide_page2 input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -4px;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 10px white;
+  }
+}
+
+@media (min-width : 600px){
+/* input radio css style */
+  .slide_page2 input[type=radio] {  
+      display: none;  
+  }
+
+  .slide_page2 input[type=radio] {
+      margin: 1px 0 0;
+      margin-top: 1px \9;
+      line-height: normal;
+  }
+
+  .slide_page2 input[type=radio] + label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 12px;
+    margin-right: 0px;
+    font-size: 1.3rem;
+  }
+
+  .slide_page2 input[type=radio]+ label:before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    background: #ccc; 
+    border: none;
+    border-radius: 100%;
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+  }
+
+  .slide_page2 input[type="radio"] + label:active:before,
+  .slide_page2 input[type="radio"]:checked + label:active:before  {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+  .slide_page2 input[type="radio"]:checked + label:before {
+    background: #2f87c1;
+  }
+  .slide_page2 input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -4px;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 10px white;
+  }
+}
+
