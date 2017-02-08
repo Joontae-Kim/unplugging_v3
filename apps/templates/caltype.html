@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>우리집 전기요금 계산기 | 가정용 전기요금 계산 및 분석 서비스</title>
+    <meta charset="UTF-8">	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Joontae Kim">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="우리집 전기요금 계산기를 이용해 전기요금뿐만 아니라 사용패턴까지 자가분석해보세요!">
+	<meta name="keywords" content="전기요금, 전기세, 전기요금 계산기, 가정용 전기요금, 우리집 전기요금, 우리집 전기세, 가정용 전기세, 한국전력 전기요금 계산기, 가전제품, 냉장고, 에어컨">
+	<meta name="author" content="Joontae Kim">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="우리집 전기세">
+	<meta property="og:description" content="우리집 전기요금 계산기를 이용해 전기요금뿐만 아니라 사용패턴까지 자가분석해보세요!">
+	<meta property="og:image" content="../static/img/logo.png">
+	<meta property="og:url" content="http://unpluging.com">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link rel="stylesheet" href="../static/bootstrap3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/bootstrap3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../static/bootstrap-select1.10.0/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/sameinputstyle.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/sameinputstyle2.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/slidebottomstyle.css">
+	<link href="../static/js/jquery.bxslider.css" rel="stylesheet">
+	<link href="../static/css/caltype1nor.css" media="screen and (min-width: 600px)" rel="stylesheet">
+	<link href="../static/css/caltype1mobile.css" media="screen and (min-width: 320px) and (max-width: 599px)" rel="stylesheet">
+	<script type="text/javascript" src="../static/js/jqeury-2.1.3.min.js"></script>
+	<script type="text/javascript" src="../static/bootstrap3.3.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../static/bootstrap-select1.10.0/bootstrap-select.min.js"></script>
+	<script src="../static/js/jquery.bxslider.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+	<script type="text/javascript" src="../static/js/usertypeprint.js"></script>
+	<script type="text/javascript" src="../static/js/calCulationScript.js"></script>
+	<script type="text/javascript" src="../static/js/familytypelist.js"></script>
+	<script type="text/javascript" src="../static/js/applianceslide.js"></script>
+	<script type="text/javascript" src="../static/js/calculationslide.js"></script>
+	<!-- <script type="text/javascript">
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+		  $('.selectpicker').selectpicker('mobile');
+		}
+	</script> -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<!--[if lte IE 8]>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<link rel="stylesheet" href="ie8.css" />
+		<script type="text/javascript" src="selectivizr.js"></script>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+    <section>
+    	<div class="container">
+    		<div class="row">
+    			<!-- <div class="page_frame col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-0 col-xs-12"> -->
+    			<div class="page_frame col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-6 col-xs-offset-0 col-xs-12">
+				    <header>
+				    	<div class="page_title">
+				    		<strong><h4 class="page_title_header text-center"><span id="page_title_h4"></span>
+							<div class="dropdown">
+								<div class="glyphicon glyphicon-option-vertical dropdown-toggle pull-right opt_btn" type="button" data-toggle="dropdown" aria-expanded="true" id="#opt_menu">
+								</div>
+								<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="opt_menu">
+								    <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#myModal2"><small><span class="glyphicon glyphicon-question-sign"></span></small>&nbsp; 사용방법 </a></li>
+
+								    <li role="presentation"><a role="menuitem" tabindex="-1"  data-toggle="modal" data-target=".pricing-modal-sm"><small><span class="glyphicon glyphicon-search"></span></small>&nbsp; 전기요금 체계 설명</a></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://goo.gl/forms/Pq0EUEDzMwMq9M013" target="_blank"><small><span class="glyphicon glyphicon-comment"></span></small>&nbsp; 문의하기</a></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="/" target="_self"><small><span class="glyphicon glyphicon-home"></span></small> 홈으로 나가기</a></li>
+								</ul>
+							</div>
+
+				    		</h4></strong>
+				    	</div>
+				    </header>
+    				<ul class="bxslider">
+    					<li>
+	    					<div class="slide_page">
+				        		<!-- <div class="slide_header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<h5 class="text-center">해당 사항을 선택하시면 보다 정확하고, 편리하게 이용하실 수 있습니다!</h5>
+				        		</div> -->
+								<form id="necform" class="form-horizontal col-xs-12">
+									<div class="form-group house">
+									    <label for="house" class="col-lg-offset-0 col-lg-5 col-md-offset-1 col-md-4  col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-4 text-right control-label">1. 주거형태</label>
+									    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+											<div class="radio">
+											    <input type="radio" name="house" id="house1" data-house-type="higher">
+											    <label for="house1">단층형 아파트</label>
+											</div>
+											<div class="radio">
+											    <input type="radio" name="house" id="house2" data-house-type="lower">
+											    <label for="house2">고층형 아파트</label>
+											</div>
+											<div class="radio">
+											    <input type="radio" name="house" id="house3" data-house-type="lower">
+												<label for="house3">단독 및 연립주택</label>
+											</div>
+									    </div>
+									</div>
+					        		<div class="slide_body_hr">
+					        			<hr>	
+					        		</div>
+									<div class="form-group family">
+									    <label for="family" class="col-lg-offset-0 col-lg-5 col-md-offset-1 col-md-4  col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-4 text-right control-label">2. 가족 수</label>
+									    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+											<div class="radio">
+											    <input type="radio" name="family" id="family1" data-family-type="two">
+											    <label for="family1">3인 미만</label>
+											</div>
+											<div class="radio">
+											    <input type="radio" name="family" id="family2" data-family-type="four">
+												<label for="family2">5인 미만</label>
+											</div>
+											<div class="radio">
+											    <input type="radio" name="family" id="family3" data-family-type="five">
+												<label for="family3">5인 이상</label>
+											</div>
+									    </div>
+									</div>
+					        		<div class="slide_body_hr">
+					        			<hr>	
+					        		</div>
+	                                <div class="form-group welfare">
+	                                    <label for="welfare" class="row col-lg-offset-0 col-lg-5 col-md-offset-1 col-md-4  col-sm-offset-1 col-sm-4 col-xs-offset-0 col-xs-5 text-right control-label">3. 복지할인</label>
+	                                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-7">
+	                                        <select class="selectpicker col-lg-12 col-xs-12 text-center selwelfare2" id="selwelfare2" data-style="btn-default btn-sm show-tick" data-size="5" data-dropup-auto="false" data-container="body"></select>
+	                                    </div>
+	                                </div>
+									<div class="slide_body_hr">
+					        			<hr>	
+					        		</div>
+	                                <div class="form-group welfare">
+	                                    <label for="welfare" class="row col-lg-offset-0 col-lg-5 col-md-offset-1 col-md-4  col-sm-offset-1 col-sm-4 col-xs-offset-0 col-xs-5 text-right control-label">4. 가족할인</label>
+	                                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-7">
+	                                        <select class="selectpicker col-lg-12 col-xs-12 text-center selwelfare fm_welfare" id="selwelfare1" data-style="btn-default btn-sm show-tick" data-dropup-auto="false" data-container="body"></select>
+	                                        <div class="text-center"><p class="wel_guide"><small>※생명유지장치 할인요금 포함</small></p></div>
+	                                    </div>
+	                                </div>
+								</form> <!-- form-horizontal -->
+								<div class="row">
+					  				<div class="aptguide col-lg-offset-7 col-lg-5 col-md-offset-7 col-md-5 col-xs-offset-6 col-xs-6 apt">
+										<!-- <small class="text-right">* 단층형: 6층 미만 아파트</small> <br>
+										<small class="text-right">* 고층형: 6층 이상 아파트</small> -->
+									</div>
+								</div>
+	    					</div> 
+    					</li> <!-- 1st li page -->
+    					<li> <!-- 2nd li page -->
+	    					<div class="slide_page">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 appliance_check">
+								  	<!-- <h5 class="text-center">가전제품 사용유무에 따라 아래의 제품을 선택해주세요.</h5> -->
+								  	<div>
+									  <ul class="nav nav-tabs nav-justified"> <!-- nav-justified -->
+									    <li class="active"><a data-toggle="tab" href="#menu1">필수가전</a></li>
+									    <li><a data-toggle="tab" href="#menu2">부수가전</a></li>
+									    <li><a data-toggle="tab" href="#menu3">계절가전</a></li>
+									  </ul>
+								  	</div>
+									<div class="tab-content clearfix">
+									    <div id="menu1" class="tab-pane fade in active">
+									      	<div class="menu_box1 col-lg-offset-0 col-lg-12 col-sm-offset-0 col-sm-12 col-xs-offset-0 col-xs-12">
+												<input type="button" class="btn_default" name="nec" id="item1" value="냉장고">
+												<input type="button" class="btn_default" name="nec" id="item13" value="TV">
+												<input type="button" class="btn_default" name="nec" id="item4" value="전기밥솥">
+												<input type="button" class="btn_default" name="nec" id="item17" value="세탁기">
+												<input type="button" class="btn_default" name="nec" id="item5" value="김치냉장고">
+												<input type="button" class="btn_default" name="nec" id="item31" value="드럼세탁기">
+												<input type="button" class="btn_default" name="nec" id="item10" value="전자레인지">
+												<input type="button" class="btn_default" name="nec" id="item14" value="형광등">
+									    	</div>
+										</div>
+									    <div id="menu2" class="tab-pane fade">
+											<div class="menu_box2 col-lg-12 col-xs-12">
+												<input type="button" class="btn_default" name="sub" id="item11" value="비데">
+												<input type="button" class="btn_default" name="sub" id="item16" value="다리미">
+												<input type="button" class="btn_default" name="sub" id="item22" value="노트북">
+												<input type="button" class="btn_default" name="sub" id="item21" value="충전기">
+												<input type="button" class="btn_default" name="sub" id="item18" value="컴퓨터">
+												<input type="button" class="btn_default" name="sub" id="item23" value="셋톱박스">
+												<input type="button" class="btn_default" name="sub" id="item19" value="모니터">
+												<input type="button" class="btn_default" name="sub" id="item24" value="드라이기">
+										    </div>
+									    </div>
+									    <div id="menu3" class="tab-pane fade">
+											<div class="menu_box3 col-xs-12">
+												<input type="button" class="btn_default" name="season" id="item26" value="선퐁기">
+												<input type="button" class="btn_default" name="season" id="item25" value="에어컨">
+												<input type="button" class="btn_default" name="season" id="item27" value="온풍기">
+												<input type="button" class="btn_default" name="season" id="item29" value="온수매트">
+												<input type="button" class="btn_default" name="season" id="item28" value="전열난로">
+												<input type="button" class="btn_default" name="season" id="item30" value="전기장판">
+										    </div>
+									    </div>
+									</div> <!-- tab-content -->
+		    					</div>
+		    					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 howmany">
+										<h5 class="text-center">가전제품 선택개수: <span id="appliance_count">0</span> 개</h5>	
+									</div>
+								</div>
+								<div class="row">
+					  				<div class="col-lg-12 col-xs-offset-6 col-xs-6">
+									</div>
+								</div>
+	    					</div>
+    					</li> <!-- 2nd li page -->
+    					<li> <!-- 3th li page -->
+				        	<div class="app_nm">
+				        		<h4 class="text-center"> <span id="app_nm">냉장고</span> <small><span id="app_unit">용량(L)</span></small> </h4>
+				        	</div>
+				        	<div class="container col-lg-12 col-sm-12 col-md-12">
+			        		<div class="slide_page2">
+								<ul class="bxslider2">
+									<li id="slide_item1">
+							        	<div class="inslide_page">
+								        	<div class="container typelist col-lg-12 col-sm-12 col-md-12 col-xs-12">
+										      	<div class="col-lg-4 col-sm-4 col-xs-4 chklist">
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri1">
+													    <label for="refri1">1000L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri4">
+													    <label for="refri4">700L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri7">
+													    <label for="refri7">400L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri10">
+														<label for="refri10">100L</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-4 col-sm-4 col-xs-4 chklist">
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri2">
+													    <label for="refri2">900L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri5">
+													    <label for="refri5">600L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri8">
+													    <label for="refri8">300L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri11">
+														<label for="refri11">미만</label>
+													</div>
+										      	</div>
+										      	<div class="col-xs-4 chklist txtcen">
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri3">
+														<label for="refri3">800L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri6">
+														<label for="refri6">500L</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-3 col-sm-offset-2 sw375_1 sw400_3 sw479_3">
+													    <input type="radio" name="item_item1" id="refri9">
+														<label for="refri9">200L</label>
+													</div>
+										      	</div>		
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item1 -->
+						        	<li id="slide_item5">
+						        		<div class="inslide_page">
+						        			<div class="container typelist col-lg-12 col-sm-12 col-md-12 col-xs-12">
+										      	<div class="col-lg-offset-1 col-lg-5 col-sm-offset-1 col-sm-5 col-xs-offset-1 col-xs-5 chklist">
+													<div class="checkbox text-center sw400_1">
+													    <input type="radio" name="item_item5" id="kimchirefri1">
+													    <label for="kimchirefri1">800L</label>
+													</div>
+													<div class="checkbox text-center sw400_1">
+													    <input type="radio" name="item_item5" id="kimchirefri3">
+														<label for="kimchirefri3">400L</label>
+													</div>
+													<div class="checkbox text-center sw400_1">
+													    <input type="radio" name="item_item5" id="kimchirefri5">
+													    <label for="kimchirefri5">200L</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-5 col-sm-5 col-xs-4 text-center chklist">
+													<div class="checkbox col-lg-offset-0 col-sm-offset-0 col-xs-offset-1">
+													    <input type="radio" name="item_item5" id="kimchirefri2">
+													    <label for="kimchirefri2">500L</label>
+													</div>												      	
+													<div class="checkbox col-lg-offset-0 col-sm-offset-0 col-xs-offset-1">
+													    <input type="radio" name="item_item5" id="kimchirefri4">
+													    <label for="kimchirefri4">300L</label>
+													</div>
+													<div class="checkbox col-lg-offset-0 col-sm-offset-0 col-xs-offset-1">
+													    <input type="radio" name="item_item5" id="kimchirefri6">
+														<label for="kimchirefri6">100L</label>
+													</div>
+										      	</div>		
+						    				</div>
+						        		</div>
+						        	</li> <!-- slide_item5 -->
+						        	<li id="slide_item4">
+						        		<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-sm-12 col-md-12 col-xs-12">
+										      	<div class="col-lg-offset-1 col-lg-5 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-6 col-xs-offset-1 col-xs-5 text-center chklist">
+													<div class="checkbox">
+													    <input type="radio" name="item_item4" id="ricepot1">
+													    <label for="ricepot1">10인용</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item4" id="ricepot3">
+														<label for="ricepot3">4인용</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item4" id="ricepot5">
+													    <label for="ricepot5">1인용</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-5 col-xs-offset-0 col-xs-5 text-center chklist">
+													<div class="checkbox col-lg-offset-1 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item4" id="ricepot2">
+													    <label for="ricepot2">6인용</label>
+													</div>
+													<div class="checkbox col-lg-offset-1 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item4" id="ricepot4">
+													    <label for="ricepot4">3인용</label>
+													</div>
+										      	</div>
+						    				</div>
+						        		</div>
+						        	</li> <!-- slide_item4 -->
+						        	<li id="slide_item10">
+						        		<div class="inslide_page">
+						        			<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center chklist">
+													<div class="checkbox text-center">
+													    <input type="radio" name="item_item10" id="microwave1">
+													    <label for="microwave1">26L 이상</label>
+													</div>
+													<div class="checkbox text-center">
+													    <input type="radio" name="item_item10" id="microwave3">
+													    <label for="microwave3">18L 이상</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-5 col-md-6 col-sm-5 col-xs-6 text-center chklist">
+													<div class="checkbox col-lg-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item10" id="microwave2">
+													    <label for="microwave2">21L 이상</label>
+													</div>
+													<div class="checkbox col-lg-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item10" id="microwave4">
+													    <label for="microwave4">15L 이상</label>
+													</div>															
+										      	</div>		
+						    				</div>
+						        		</div>
+						        	</li> <!-- slide_item10 -->
+						        	<li id="slide_item13">
+						        		<div class="inslide_page">
+						        			<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-6 col-sm-6 col-xs-6 chklist text-center">
+													<div class="checkbox col-lg-offset-0 col-md-offset-0 col-sm-offset-2 sw320_0 sw360_0 sw375_1 sw400_0 sw479_5">
+													    <input type="radio" name="item_item13" id="tv1">
+													    <label for="tv1">65인치 이상</label>
+													</div>
+													<div class="checkbox col-lg-offset-0 col-md-offset-0 col-sm-offset-2 sw320_0 sw360_0 sw375_1 sw400_0 sw479_5">
+													    <input type="radio" name="item_item13" id="tv3">
+													    <label for="tv3">42인치 이상</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-6 col-xs-6 chklist text-center">
+													<div class="checkbox col-lg-offset-1 col-md-offset-0 col-sm-offset-1 sw320_0 sw360_0 sw375_1 sw400_0">
+													    <input type="radio" name="item_item13" id="tv2">
+													    <label for="tv2">50인치 이상</label>
+													</div>
+													<div class="checkbox col-lg-offset-1 col-md-offset-0 col-sm-offset-1 sw320_0 sw360_0 sw375_1 sw400_0">
+													    <input type="radio" name="item_item13" id="tv4">
+													    <label for="tv4">34인치 이상</label>
+													</div>
+										      	</div>		
+						    				</div>
+						        		</div>
+						        	</li> <!-- slide_item13 -->
+						        	<li id="slide_item23">
+							        	<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-3 col-lg-5 col-xs-offset-3 col-xs-5 chklist text-center">
+													<div class="checkbox col-lg-offset-3 col-xs-offset-3">
+													    <input type="radio" name="item_item23" id="iptv">
+													    <label for="iptv">IPTV</label>
+													</div>
+										      	</div>		
+						    				</div>
+						    			</div>
+					    			</li> <!-- slide_item23 -->
+						        	<li id="slide_item17">
+						        		<div class="inslide_page">
+						        			<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-0 col-lg-6 col-xs-offset-0 col-xs-6 text-center chklist">
+													<div class="checkbox col-lg-offset-3 col-md-offset-3 sw320_2 sw360_2 sw375_1 sw400_2">
+													    <input type="radio" name="item_item17" id="washing1">
+													    <label for="washing1">15kg</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-3 sw320_2 sw360_2 sw375_1 sw400_2">
+													    <input type="radio" name="item_item17" id="washing3">
+													    <label for="washing3">12kg</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-5 col-xs-5 text-center chklist">
+													<div class="checkbox">
+													    <input type="radio" name="item_item17" id="washing2">
+													    <label for="washing2">14kg</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item17" id="washing4">
+													    <label for="washing4">10kg</label>
+													</div>
+										      	</div>		
+						    				</div>
+						        		</div>
+						        	</li> <!-- slide_item17 -->
+						        	<li id="slide_item31">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-0 col-lg-6 col-xs-offset-0 col-xs-6 chklist text-center">
+													<div class="checkbox col-lg-offset-3 col-md-offset-3 col-xs-offset-1">
+													    <input type="radio" name="item_item31" id="drum1">
+													    <label for="drum1">19kg</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-3 col-xs-offset-1">
+													    <input type="radio" name="item_item31" id="drum3">
+														<label for="drum3">16kg</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-3 col-xs-offset-1">
+													    <input type="radio" name="item_item31" id="drum5">
+													    <label for="drum5">13kg</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-5 col-xs-5 chklist text-center">
+													<div class="checkbox">
+													    <input type="radio" name="item_item31" id="drum2">
+													    <label for="drum2">17kg</label>
+													</div>      	
+													<div class="checkbox">
+													    <input type="radio" name="item_item31" id="drum4">
+													    <label for="drum4">15kg</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item31" id="drum6">
+														<label for="drum6">12kg</label>
+													</div>
+										      	</div>		
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item31 -->
+						        	<li id="slide_item18">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						    					<span class="group2 col-lg-6 col-xs-6">
+											      	<div class="col-xs-12 text-center chklist">
+												      	<h5 class="text-center subtitle">일반형</h5>
+														<div class="checkbox">
+														    <input type="radio" name="item_item18" id="com1" data-read="슬림형">
+														    <label for="com1">슬림형</label>
+														</div>
+														<div class="checkbox">
+														    <input type="radio" name="item_item18" id="com2" data-read="타워">
+														    <label for="com2">타워형</label>
+														</div>
+											      	</div>
+						    					</span>
+						    					<span class="group2 col-lg-6 col-md-6 col-xs-6">
+													<div class="col-xs-12 text-center chklist">
+														<h5 class="text-center subtitle">일체형</h5>
+														<div class="checkbox">
+														    <input type="radio" name="item_item18" id="com3" data-read="일체형 24인치">
+														    <label for="com3">24인치</label>
+														</div>
+														<div class="checkbox">
+														    <input type="radio" name="item_item18" id="com4" data-read="일체형 23인치">
+														    <label for="com4">23인치</label>
+														</div>
+														<div class="checkbox">
+														    <input type="radio" name="item_item18" id="com5" data-read="일체형 22인치">
+														    <label for="com5">22인치</label>
+														</div>
+														<div class="checkbox">
+														    <input type="radio" name="item_item18" id="com6" data-read="일체형 21인치">
+														    <label for="com6">21인치</label>
+														</div>
+													</div>
+						    					</span>
+									      	</div>
+							        	</div>
+						        	</li> <!-- slide_item18 -->
+						        	<li id="slide_item19">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-2 col-lg-7 col-xs-offset-2 col-xs-7 text-center chklist">
+													<div class="checkbox col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
+													    <input type="radio" name="item_item19" id="mon1">
+													    <label for="mon1">34인치 이상</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
+													    <input type="radio" name="item_item19" id="mon2">
+													    <label for="mon2">27인치 이상</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
+													    <input type="radio" name="item_item19" id="mon3">
+														<label for="mon3">20인치 이상</label>
+													</div>
+										      	</div>
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item19 -->
+						        	<li id="slide_item22">
+							        	<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-5 col-xs-5 text-center chklist">
+											      	<h5>일반</h5>
+													<div class="checkbox">
+													    <input type="radio" name="item_item22" id="note1" data-read="일반 15인치">
+													    <label for="note1">15인치</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item22" id="note2" data-read="일반 13인치">
+													    <label for="note2">13인치</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item22" id="note3" data-read="일반 11인치">
+													    <label for="note3">11인치</label>
+													</div>
+												</div>
+												<div class="row col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-7 col-sm-8 sw320_8_col sw360_8_col sw375_8_col sw400_8_col sw479_7_col sw800_8_col chklist">
+													<h5 class="text-center">애플</h5>
+													<div class="checkbox col-lg-offset-1 col-md-offset-1 col-sm-offset-2 sw360_1 sw375_1 sw400_2 sw479_3">
+													    <input type="radio" name="item_item22" id="note4" data-read="프로 레티나...">
+													    <label for="note4">프로 레티나 15인치</label>
+													</div>
+													<div class="checkbox col-lg-offset-1 col-md-offset-1 col-sm-offset-2 sw360_1 sw375_1 sw400_2 sw479_3" data-read="프로 레티나...">
+													    <input type="radio" name="item_item22" id="note5">
+													    <label for="note5">프로 레티나 13인치</label>
+													</div>
+													<div class="checkbox col-lg-offset-1 col-md-offset-1 col-sm-offset-3 sw360_1 sw375_1 sw400_2 sw479_3" data-read="레티나 12인치">
+													    <input type="radio" name="item_item22" id="note7">
+													    <label for="note7">레티나 12인치</label>
+													</div>
+													<div class="checkbox col-lg-offset-1 col-md-offset-1 col-sm-offset-2 sw360_1 sw375_1 sw400_2 sw479_3" data-read="에어 11인치">
+													    <input type="radio" name="item_item22" id="note6">
+													    <label for="note6">에어 11인치</label>
+													</div>
+												</div>
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item22 -->
+						        	<li id="slide_item25">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-xs-4 text-center chklist">
+											      	<h5>스탠드</h5>
+													<div class="checkbox">
+													    <input type="radio" name="item_item25" id="air1" data-read="스탠드 20평">
+													    <label for="air1">20평</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item25" id="air2" data-read="스탠드 15평">
+													    <label for="air2">15평</label>
+													</div>		
+										      	</div>
+										      	<div class="col-xs-4 chklist text-center">
+											      	<h5 class="col-lg-offset-0 col-md-offset-0 col-sm-offset-2 sw360_0 sw375_0 sw400_0 sw479_3">벽걸이</h5>
+													<div class="checkbox col-md-offset-0 col-sm-offset-2 sw360_0 sw375_0 sw400_0 sw479_3">
+													    <input type="radio" name="item_item25" id="air3" data-read="벽걸이 13평">
+													    <label for="air3">13평</label>
+													</div>
+													<div class="checkbox col-md-offset-0 col-sm-offset-2  sw360_0 sw375_0 sw400_0 sw479_3">
+													    <input type="radio" name="item_item25" id="air4" data-read="벽결이 8평">
+														<label for="air4">8평</label>
+													</div>
+													<div class="checkbox col-md-offset-0 col-sm-offset-2 sw360_0 sw375_0 sw400_0 sw479_3">
+													    <input type="radio" name="item_item25" id="air5" data-read="벽결이 6평">
+													    <label for="air5">6평</label>
+													</div>		
+										      	</div>
+										      	<div class="col-xs-4 text-center chklist">
+											      	<h5>천장</h5>
+													<div class="checkbox">
+													    <input type="radio" name="item_item25" id="air6" data-read="천창 18평">
+														<label for="air6">18평</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item25" id="air7" data-read="천창 15평">
+														<label for="air7">15평</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item25" id="air8" data-read="천창 13">
+														<label for="air8">13평</label>
+													</div>			
+										      	</div>
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item25 -->
+						        	<li id="slide_item26">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-3 col-lg-5 col-xs-offset-3 col-xs-6 chklist text-center">
+													<div class="checkbox col-lg-offset-3 col-md-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item26" id="fan1">
+													    <label for="fan1">스탠드형</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item26" id="fan2">
+													    <label for="fan2">벽걸이형</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item26" id="fan3">
+													    <label for="fan3">탁상형</label>
+													</div>
+										      	</div>	
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item26 -->
+						        	<li id="slide_item27">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-3 col-lg-5 col-xs-offset-2 col-xs-8 chklist text-center">
+													<div class="checkbox col-lg-offset-3 col-md-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item27" id="hotfan1">
+													    <label for="hotfan1">스탠드형</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item27" id="hotfan2">
+													    <label for="hotfan2">벽걸이형</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-0 col-xs-offset-0">
+													    <input type="radio" name="item_item27" id="hotfan3">
+														<label for="hotfan3">미니형</label>
+													</div>
+										      	</div>		
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item27 -->
+						        	<li id="slide_item29">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-0 col-lg-6 col-md-offset-0 col-md-6 col-xs-offset-1 col-xs-5 chklist text-center">
+													<div class="checkbox col-lg-offset-3 col-md-offset-2 col-sm-offset-1 sw375_1 sw400_1 sw479_2">
+													    <input type="radio" name="item_item29" id="heatmat1">
+													    <label for="heatmat1">4인용</label>
+													</div>
+													<div class="checkbox col-lg-offset-3 col-md-offset-2 col-sm-offset-1 sw375_1 sw400_1 sw479_2">
+													    <input type="radio" name="item_item29" id="heatmat2">
+													    <label for="heatmat2">2인용</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-5 col-xs-5 chklist text-center">
+													<div class="checkbox">
+													    <input type="radio" name="item_item29" id="heatmat3">
+													    <label for="heatmat3">3인용</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item29" id="heatmat4">
+														<label for="heatmat4">1인용</label>
+													</div>
+										      	</div>
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item29 -->
+						        	<li id="slide_item28">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-1 col-lg-5 col-xs-offset-0 col-xs-6 chklist text-center">
+													<div class="checkbox col-lg-offset-0 col-md-offset-1 sw320_0 sw360_0 sw375_0 sw400_1">
+													    <input type="radio" name="item_item28" id="elecheater1">
+													    <label for="elecheater1">선풍기형</label>
+													</div>
+													<div class="checkbox col-lg-offset-0 col-md-offset-1 sw320_0 sw360_0 sw375_0 sw400_1">
+													    <input type="radio" name="item_item28" id="elecheater2">
+													    <label for="elecheater2">벽걸이형</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-5 col-xs-5 text-center chklist">
+													<div class="checkbox">
+													    <input type="radio" name="item_item28" id="elecheater3">
+													    <label for="elecheater3">타워형</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item28" id="elecheater4">
+													    <label for="elecheater4">미니형</label>
+													</div>
+										      	</div>		
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item28 -->
+						        	<li id="slide_item30">
+							        	<div class="inslide_page">
+							        		<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-1 col-lg-5 col-xs-offset-0 col-xs-6 chklist text-center">
+													<div class="checkbox col-lg-offset-2 col-md-offset-2 col-xs-offset-0">
+													    <input type="radio" name="item_item30" id="elecmat1">
+													    <label for="elecmat1">4인용</label>
+													</div>
+													<div class="checkbox col-lg-offset-2 col-md-offset-2 col-xs-offset-0">
+													    <input type="radio" name="item_item30" id="elecmat3">
+													    <label for="elecmat3">2인용</label>
+													</div>
+										      	</div>
+										      	<div class="col-lg-5 col-xs-6 text-center chklist">
+													<div class="checkbox">
+													    <input type="radio" name="item_item30" id="elecmat2">
+													    <label for="elecmat2">3인용</label>
+													</div>												      	
+													<div class="checkbox">
+													    <input type="radio" name="item_item30" id="elecmat4">
+													    <label for="elecmat4">1인용</label>
+													</div>
+										      	</div>
+						    				</div>
+							        	</div>
+						        	</li> <!-- slide_item30 -->
+							        <li id="slide_item24">
+							        	<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-2 col-lg-8 col-xs-12 text-center chklist">
+													<div class="checkbox">
+													    <input type="radio" name="item_item24" id="dryer1"  data-read="미니형">
+													    <label for="dryer1">미니형 (400W)</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item24" id="dryer2" data-read="일반형">
+													    <label for="dryer2">일반형 (600W)</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item24" id="dryer3" data-read="대형">
+														<label for="dryer3">대형 (1000W)</label>
+													</div>
+										      	</div>	
+						    				</div>
+						    			</div>
+					    			</li> <!-- slide_item24 -->
+							        <li id="slide_item14">
+							        	<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-1 col-lg-10 col-xs-12 text-center chklist">
+													<div class="checkbox">
+													    <input type="radio" name="item_item14" id="lamp1" data-read="콤팩트형">
+													    <label for="lamp1">콤팩트형 (원형 전등)</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item14" id="lamp2" data-read="직관형">
+													    <label for="lamp2">직관형 (일자형 전등)</label>
+													</div>
+													<div class="checkbox">
+													    <input type="radio" name="item_item14" id="lamp3" data-read="십자">
+														<label for="lamp3">십자형 (일자형 4개)</label>
+													</div>
+										      	</div>	
+						    				</div>
+						    			</div>
+					    			</li> <!-- slide_item14 -->
+					    			<li id="slide_item11">
+							        	<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-2 col-lg-7 col-xs-offset-0 col-xs-12 text-center chklist">
+													<div class="checkbox col-lg-offset-3 col-xs-offset0">
+													    <input type="radio" name="item_item11" id="bide">
+													    <label for="bide">비데</label>
+													</div>
+										      	</div>	
+						    				</div>
+						    			</div>
+					    			</li> <!-- slide_item11 -->
+							        <li id="slide_item16">
+							        	<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-2 col-lg-7 col-xs-offset-0 col-xs-12 text-center chklist">
+													<div class="checkbox col-lg-offset-3 col-xs-offset0">
+													    <input type="radio" name="item_item16" id="iron">
+													    <label for="iron">다리미</label>
+													</div>
+										      	</div>	
+						    				</div>
+						    			</div>
+					    			</li> <!-- slide_item16 -->
+							        <li id="slide_item21">
+							        	<div class="inslide_page">
+						    				<div class="container typelist col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										      	<div class="col-lg-offset-2 col-lg-7 col-xs-offset-0 col-xs-12 text-center chklist">
+													<div class="checkbox col-lg-offset-3 col-xs-offset0">
+													    <input type="radio" name="item_item21" id="battery">
+													    <label for="battery">배터리</label>
+													</div>
+										      	</div>	
+						    				</div>
+						    			</div>
+					    			</li> <!-- slide_item21 -->
+								</ul> <!-- bxslider2 -->
+								<!-- <div class="outside" style="position: relative;top: -8.5em;left: 0.0em;"> -->
+								<div class="outside outside2" style="position: relative;margin-top: -11rem">
+								     <p><span class="" id="slider-prev2"></span>
+								      <span class="" id="slider-next2"></span></p>
+								</div> <!-- inslide_page pager -->
+							</div> <!-- slide_page2 -->
+							</div> <!-- container -->
+			    			<div class="col-xs-12 usersetting">
+								<div class="row">
+									<div class="sel_hour col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="col-lg-offset-1 col-lg-4 col-md-offset-1 col-md-4 col-xs-offset-1 col-xs-4">
+											<h5>사용주기</h5>
+										</div>
+										<div class="col-lg-offset-0 col-lg-6 col-md-offset-0 col-md-7 col-xs-offset-0 col-xs-7">
+										    <div class="form-group">
+										      <select class="selectpicker form-control" id="selday" data-style="btn-sm btn-default" data-dropup-auto="false" data-container="body">
+										      </select>
+										    </div>
+										</div>												
+									</div>
+									<div class="sel_peri col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="col-lg-offset-1 col-lg-4 col-md-offset-1 col-md-4 col-xs-offset-1 col-xs-4">
+											<h5>사용시간</h5>
+										</div>
+										<div class="col-lg-offset-0 col-lg-6 col-md-offset-0 col-md-7 col-xs-offset-0 col-xs-7">
+										    <div class="form-group">
+										      <select class="selectpicker form-control" id="selhr" data-style="btn-sm btn-default text-center" data-size="4" data-dropup-auto="false" data-container="body">
+										      </select>
+										    </div>
+										</div>
+									</div>
+								</div>
+								<!-- under ~ user_setting component -->
+								<span class="col-xs-12 line"></span>
+			    				<div class="row">
+		    						<div class="col-xs-9 user_choice">
+		    							<span class="type" id="type" data-toggle="tooltip" data-placement="bottom" data-target="item1" data-item-season="all">냉장고</span>
+		    							<span class="mult">&#10005;</span>
+		    							<span class="period err" id="period" data-toggle="tooltip" title="사용주기를 선택해주세요" data-placement="bottom">선택</span>
+		    							<span class="mult">&#10005;</span>
+		    							<span class="hour err" id="hour" data-toggle="tooltip" title="사용시간을 선택해주세요" data-placement="bottom">선택</span>
+		    						</div>
+		    						<div class="col-xs-3 user_choice_btn">
+		    							<button class="btn btn-success btn-sm" id="choose">&nbsp;&nbsp;사용&nbsp;&nbsp;</button>
+		    						</div>
+			    				</div>
+			    				<div class="col-xs-12 line2"></div>
+		    					<div class="col-xs-6 text-center cost" id="cost" data-total-cost="0">
+		    						 <strong> ₩ <span id="watt" data-total-watt="0">0</span></strong>
+		    					</div>
+		    					<div class="col-xs-6 text-center count" id="count">
+		    						 <strong> <span id="dis_count">0</span> 개 </strong>
+		    					</div>
+			    			</div> <!--above ~ user_setting component -->
+    					</li> <!-- 3th li page -->
+    				</ul>
+    				<footer>
+						<div class="outside">
+						    <p><span id="slider-next"></span></p>
+						    <p><button type="button" id="checkupChoice" class="btn btn-primary btn-block"  data-toggle="modal" data-target="#choiceModal" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> 계산 중...">선택제품 보기</button></p>
+						</div>
+					</footer>
+    			</div>
+    		</div>
+
+			<!--Welfare Modal -->
+			<div class="modal fade welfaremodal" id="welfaremodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				    <div class="modal-content">
+				      	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        	<h4 class="modal-title text-center" id="myModalLabel">전기요금 복지할인</h4>
+				      	</div>
+				      	<div class="modal-body">
+				        	<form class="form-horizontal">
+					          	<div class="form-group">
+						            <label for="selwelfare1" class="control-label col-lg-5 col-xs-5 text-right" style="">대가족 또는 생명유지장치 요금</label>
+						            <select class="selectpicker col-lg-4 col-xs-6 selwelfare" id="selwelfare1" data-style="btn-sm btn-default" data-dropup-auto="false" data-container="body"></select>
+					          	</div>
+					          	<div class="form-group">
+						            <label for="selwelfare2" class="control-label col-lg-5 col-xs-5 text-right">복지할인 요금</label>
+						            <select class="selectpicker col-lg-4 col-xs-6 selwelfare" id="selwelfare2" data-style="btn-sm btn-default" data-dropup-auto="false" data-container="body"></select>
+					          	</div>
+				        	</form>
+				      	</div>
+				      	<div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					        <button type="button" class="btn btn-primary">선택완료</button>
+				      	</div>
+				    </div>
+				</div>
+			</div>
+
+			<!-- Appliance Choice Modal -->
+			<div class="modal fade" id="choiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				    <div class="modal-content">
+				      	<div class="modal-header text-center">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel"><strong>선택제품 목록</strong></h4>
+				      	</div>
+				      	<div class="modal-body">
+							<span id="userAppstatus"></span>
+				      	</div>
+				      	<div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					        <button type="button" id="complete" class="btn btn-primary">가전제품 선택완료</button>
+				      	</div>
+
+				    </div>
+				</div>
+			</div>
+
+			<!-- Blocking Modal -->
+			<div class="modal fade blckpage" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" keyboard="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+					      	<h4 class="modal-title text-center">태블릿 지원 안내사항</h4>
+					    </div>
+					  	<div class="modal-body text-center">
+					    	<p class="sorry">죄송합니다. 현재 태블릿 기기를 지원하고 있지 않으며, 스마트폰 및 PC를 통해 접속해주시면 감사하겠습니다. 또한, 추후 태블릿 기기 지원에 대한 소식을 받고자 하신다면 이메일 또는 문자를 통해 알려드리겠습니다.</p>
+					    	<p><div class="input-group">
+					      		<span class="input-group-addon" id="basic-addon1">@</span><input type="text" class="form-control" placeholder="이메일" aria-describedby="basic-addon1">
+							</div></p>
+					    	<p><div class="input-group">
+					  			<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-phone"></span></span><input type="text" class="form-control" placeholder="전화번호" aria-describedby="basic-addon1">
+					    	</div></p>
+					  	</div>
+					    <div class="modal-footer">
+					        <button class="btn btn-success"> 전송하기 </button> 
+					        <a href="/" class="btn btn-primary">나가기</a>
+					    </div>
+					</div>
+				</div>
+			</div>
+    	</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  	<div class="modal-dialog modal-lg">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        		<h4 class="modal-title text-center" id="myModalLabel">도움말</h4>
+		      		</div>
+				    <div class="modal-body">
+                        <div id="carousel-example-generic" id="guide_carousel" class="carousel slide" data-ride="carousel">
+                          <!-- Wrapper for slides -->
+                          <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+		                    	<div class="carousel-content">
+		                    		<div class="col-lg-offset-1 col-lg-10 col-xs-12 guide_pc">
+			                    		<h3 class="text-center">1단계 : 요금정보 선택 <small>요금계산 필수정보 선택</small> </h3>
+		                    			<div class="col-lg-7 text-center">
+		                    				<img class="description_img" src="../static/img/part1.png">
+		                    			</div>
+		                    			<div class="col-lg-5 description_wrapper">
+		                    				<h4 class="row text-center description_title"><strong>설명</strong></h4>
+		                    				<div class="col-lg-12 description_contents">
+				                    			<h4><strong><span class="rounded_number">&#10102;</span></strong> 주거형태</h4>
+					                            <p>적용 계약전력 정보를 불러오기 위한 필수사항입니다.</p>
+		                    				</div>
+				                            <div class="col-lg-12 description_contents">
+					                            <h4><strong><span class="rounded_number">&#10103;</span></strong> 가족수</h4>
+					                            <p>가족수에 따른 가전제품 목록을 불러오기 위한 필수사항입니다.</p>
+				                            </div>
+				                            <div class="col-lg-12 description_contents">
+					                            <h4><strong><span class="rounded_number">&#10104;</span></strong> 복지할인 및 가족할인</h4>
+					                            <p class="">복지할인 또는 대가족, 다자녀 가구 등의 할인혜택을 적용하실 수 있습니다.</p>
+				                            </div>
+				                            <div class="col-lg-12 description_contents2">
+					                            <h4><strong><span class="rounded_number">&#10105;</span></strong> 선택완료 버튼</h4>
+					                            <p>필수사항인 주거형태와 가족수 모두 선택해주시면 다음 단계로 넘어가실 수 있습니다.</p>
+				                            </div>
+		                    			</div>
+	                    			</div>
+                                    <div class="guide_mobile">
+	                                    <h3 class="text-center">1단계 : 요금정보 선택 <br><small>요금계산 필수정보 선택</small> </h3>
+                                        <img class="description_img col-xs-12" src="../static/img/howTo_mobile_part1.png">
+                                    </div>
+		                    	</div>
+                            </div>
+                            <div class="item">
+		                    	<div class="carousel-content">
+		                    		<div class="col-lg-offset-1 col-lg-10 col-xs-12 guide_pc">
+			                    		<h3 class="text-center">2단계 : 가전제품 카테고리 <small>카테고리별 가전제품 선택.</small> </h3>
+		                    			<div class="col-lg-7 text-center">
+		                    				<img class="description_img" src="../static/img/part2.png">
+		                    			</div>
+		                    			<div class="col-lg-5 description_wrapper">
+		                    				<h4 class="row text-center description_title"><strong>설명</strong></h4>
+		                    				<div class="col-lg-12 description_contents">
+				                    			<h4><strong><span class="rounded_number">&#10102;</span></strong> 가전제품 카테고리</h4>
+					                            <p>가전유형에 따라 필수가전, 부수가전, 계절가전으로 구분하였습니다.</p>
+		                    				</div>
+				                            <div class="col-lg-12 description_contents">
+					                            <h4><strong><span class="rounded_number">&#10103;</span></strong> 가전제품 선택</h4>
+					                            <p>선택한 가전제품은 바둑의&nbsp;<span style="background-color:#484848;color:white;">&nbsp;흙돌&nbsp;</span>&nbsp;과 같이 표시된 것입니다.</p>
+				                            </div>
+				                            <div class="col-lg-12 description_contents">
+					                            <h4><strong><span class="rounded_number">&#10104;</span></strong> 총 선택개수</h4>
+					                            <p>각 가전유형의 총 사용선택 개수 입니다.</p>
+				                            </div>
+				                            <div class="col-lg-12 description_contents2">
+					                            <h4><strong><span class="rounded_number">&#10105;</span></strong> 선택완료 버튼</h4>
+					                            <p>사용 가전제품을 모두 선택해주신 후 마지막 3 단계로 넘어가시면 됩니다.</p>
+				                            </div>
+		                    			</div>
+			                        </div>
+                                    <div class="guide_mobile">
+	                                    <h3 class="text-center">2단계 : 가전제품 카테고리 <br><small>카테고리별 가전제품 선택.</small> </h3>
+                                        <img class="description_img col-xs-12" src="../static/img/howTo_mobile_part2.png">
+                                    </div>
+		                    	</div>
+                            </div>
+                            <div class="item">
+		                    	<div class="carousel-content">
+		                    		<div class="col-lg-offset-1 col-lg-10 col-xs-12 guide_pc">
+			                    		<h3 class="text-center">3단계 : 사용시간 선택 <small>제품유형, 사용주기, 사용시간 선택.</small> </h3>
+		                    			<div class="col-lg-7 text-center">
+		                    				<img class="description_img" src="../static/img/part3.png">
+		                    			</div>
+		                    			<div class="col-lg-5 description_wrapper">
+		                    				<h4 class="row text-center description_title"><strong>설명</strong></h4>
+		                    				<div class="col-lg-12 description_contents">
+				                    			<h4><strong><span class="rounded_number">&#10102;, &#10103;</span></strong> 제품명, 제품유형</h4>
+					                            <p>제품명과 각 제품의 유형입니다. 해당 제품의 유형을 선택해주세요.</p>
+		                    				</div>
+				                            <div class="col-lg-12 description_contents">
+					                            <h4><strong><span class="rounded_number">&#10104;</span></strong> 사용주기 및 시간</h4>
+					                            <p>'매일', '일주일 동안', '한달동안'에 '몇 시간' 사용하는지 사용주기와 시간을 선택해주세요. </p>
+				                            </div>
+				                            <div class="col-lg-12 description_contents">
+					                            <h4><strong><span class="rounded_number">&#10105;</span></strong> 계산공식 및 사용버튼</h4>
+					                            <p>제품별 전력소비량과 요금의 계산공식이며 사용버튼을 누르시면 계산됩니다.</p>
+				                            </div>				                            
+				                            <div class="col-lg-12 description_contents2">
+					                            <h4><strong><span class="rounded_number">&#10106;, &#10107;</span></strong> 선택제품 보기</h4>
+					                            <p>선택 제품목록을 보기 및 선택취소를 하실 수 있으며, <large> &#10107;</large>을 누르시면 다음 제품으로 넘어가실 수 있습니다.</p>
+				                            </div>
+		                    			</div>
+			                        </div>
+                                    <div class="guide_mobile">
+	                                    <h3 class="text-center">3단계 : 사용시간 선택 <br> <small>제품유형, 사용주기, 사용시간 선택.</small> </h3>
+                                        <img class="description_img col-xs-12" src="../static/img/howTo_mobile_part3.png">
+                                    </div>
+		                    	</div>
+                            </div>
+                          </div>
+
+                          <!-- Controls -->
+                          <a class="row left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="row right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
+				    </div>
+		      		<!-- <div class="modal-footer">
+		        		<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		      		</div> -->
+		    	</div>
+		  	</div>
+		</div>
+		<!-- Modal to how to use -->
+    </section>
+	<script type="text/javascript" src="../static/js/kwhCalculates.js" defer></script>
+	<script type="text/javascript" src="../static/js/restfunction.js" defer></script>
+	<script type="text/javascript">
+		$(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		  	$('[data-toggle="tooltip"]').tooltip({container:"body"});
+			$('.carousel').carousel({
+			  interval: false,
+			  pause : true
+			});
+
+			var scr_width = screen.width;
+			if (scr_width < 360){
+				$('.outside2').css('width','105%');
+				$('.outside2').css('left','-6px');
+			}
+		});
+	</script>
+	<script type="text/javascript">
+	    var _mfq = _mfq || [];
+	    (function() {
+	        var mf = document.createElement("script");
+	        mf.type = "text/javascript"; mf.async = true;
+	        mf.src = "//cdn.mouseflow.com/projects/ce8e3354-7490-4383-8d4d-95505cd70401.js";
+	        document.getElementsByTagName("head")[0].appendChild(mf);
+	    })();
+	</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-88385445-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+	</body>
+</html>
