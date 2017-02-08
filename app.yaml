@@ -1,0 +1,43 @@
+application: test222-1243
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+builtins:
+- appstats: on
+- admin_redirect: on
+- deferred: on
+- remote_api: on
+
+handlers:
+#- url: /favicon.ico
+#  static_files: apps/static/images/favicon.ico
+#  upload: apps/static/images/favicon.ico
+#
+#- url: /robots.txt
+#  static_files: apps/static/robots.txt
+#  upload: apps/static/robots.txt
+
+- url: /robots.txt
+  static_files: apps/static/robots.txt
+  upload: apps/static/robots.txt
+
+# - url: /static
+#   static_dir: apps/static
+
+- url: .*
+  script: apps.app
+
+- url: /(.*\.png)
+  mime_type: image/png
+  static_files: template/\1
+  upload: template/(.*\.png)
+
+libraries:
+- name: jinja2
+  version: latest
+
+- name: markupsafe
+  version: latest
+
