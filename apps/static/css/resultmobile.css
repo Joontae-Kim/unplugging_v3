@@ -1,0 +1,391 @@
+body{
+  background-color: #fff;
+}
+
+.resultbox{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: #FAFAFA;
+}
+
+.title ,.eleclevel ,.user ,.content_btn ,.contents{
+  background-color: white;
+}
+
+.title{
+  border-bottom: 1px solid rgba(158, 158, 158, 0.15);
+  background-color: #f5f5f5;
+}
+
+.title h4{
+  font-weight: 300;
+}
+
+.circle {
+  margin-top: 0.0em;
+  position: relative;
+  width: 7.5em;
+  height: 7.5em;
+  border-radius: 50%;
+  font-size: 1em;
+  color: #fff;
+  text-align: center;
+  background: #FDD835;
+  box-shadow: 1px 1px 1px #888888;
+  margin-left: 2em;
+  z-index: 1;
+}
+
+.circle1 {
+  position: relative; 
+  left: 0.8em;
+  top: 0.75em;
+  width: 6.0em;
+  height: 6.0em;
+  border-radius: 50%;
+  font-size: 1em;
+  color: #000;
+  text-align: center;
+  background: #fff;
+}
+
+.fee h4{
+  padding-top: 2.0em;
+}
+
+.user h4:nth-child(3) {
+    margin-bottom: -0.5em;
+}
+
+.content_btn{
+  height: 3.5em;
+  background: #f5f5f5;
+}
+
+.contents{
+  height: 24em;
+}
+
+/* 전기요금 분석 탭 nav 및 contents */
+.nav-tabs.nav-justified{
+  padding: 0.5em;
+  position: relative;
+  text-align:center;
+}
+
+.nav-tabs.nav-justified li {
+  margin-bottom: none;
+  position: initial;
+  border-bottom: 0px solid;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+   zoom:1; /* hasLayout ie7 trigger */
+  width: 32%;
+}
+
+.nav-tabs.nav-justified li a {
+  position: initial;
+  border-bottom: 0px solid;
+  background: transparent;
+  border: none;
+  color: gray;
+  margin-top: -0.2em;
+}
+
+.nav-tabs.nav-justified> li.active > a,
+.nav-tabs.nav-justified> li.active > a:focus,
+.nav-tabs.nav-justified> li.active > a:hover{
+  border-width: 0;
+  border: 0px;
+  color: black;
+  font-weight: bold;
+  font-size: 1.1em;
+  background: #f5f5f5;  
+}
+
+.nav-tabs.nav-justified> li.active > a:hover{
+  border-width: 0;
+  border: 0px;
+  color: black;
+  font-weight: bold;
+  background: #f5f5f5;
+}
+
+.nav-tabs > li > a:hover {
+  background: transparent;
+}
+
+.summaryResults ,.DetailedResults{
+  font-size: 1.0em;
+  border-bottom: 1px solid #ddd;
+}
+
+.result-tabcontent .summaryResults td:nth-child(2) {
+  text-align: left;
+}
+.result-tabcontent .summaryResults td:nth-child(3) {
+  text-align: left;
+}
+.result-tabcontent .summaryResults td:nth-child(4) {
+  text-align: left;
+}
+
+.glyphicon-ok{
+  font-size: 1.0em;
+  color: #F44336;
+  display: inline;
+}
+
+.glyphicon-search{
+  position: relative;
+  top: 5px;
+  left: 5px;
+  display: inline-block;  
+  color: #9E9E9E;
+}
+
+.guide{
+  word-break: keep-all;
+  display: inline;
+}
+
+.guide strong{
+  color: #F44336;
+}
+
+.glyphicon-exclamation-sign{
+  color: #D50000;
+  position: relative;
+  top: -8px;
+  font-size: 0.7em;
+}
+
+.navbar-default .navbar-brand{
+  color: black;
+}
+
+.modal-body{
+  margin-top: -2em;
+}
+
+.pricingtabs ul.nav-tabs.nav-justified{
+  padding: 0.0em;
+  position: relative;
+  text-align:center;
+  border-bottom: 1px solid #ddd;
+}
+
+.pricingtabs ul.nav-tabs.nav-justified li {
+  margin-bottom: none;
+  position: initial;
+  border-bottom: 0px solid;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+   zoom:1; /* hasLayout ie7 trigger */
+  width: 45%;
+}
+
+.pricingtabs ul.nav-tabs.nav-justified li a {
+  position: initial;
+  border-bottom: 0px solid;
+  background: transparent;
+  border: none;
+  color: gray;
+}
+
+.pricingtabs ul.nav-tabs.nav-justified> li.active > a,
+.pricingtabs ul.nav-tabs.nav-justified> li.active > a:focus,
+.pricingtabs ul.nav-tabs.nav-justified> li.active > a:hover{
+  border-width: 0;
+  border: 0px;
+  color: black;
+  font-weight: bold;
+}
+
+.pricingtabs.nav-tabs > li > a:hover {
+  background: transparent;
+}
+
+.pricing {
+  font-size: 0.9em;
+}
+
+.pricing thead th:nth-child(1)
+,.pricing tbody th:nth-child(2)
+,.pricing tbody td:nth-child(2){
+  border-right:1px solid #eee;
+}
+
+.apt ul.nav-tabs.nav-justified li {
+  margin-bottom: none;
+  position: initial;
+  border-bottom: 0px solid;
+  display: inline-block;
+  zoom: 1;
+  width: 32%;
+}
+
+.apt .tab-content{
+  margin-top: 5%;
+}
+
+.analyzePanel h4{
+  font-size: 1.1em;
+}
+
+.welfaregroup > .panel > .panel-heading > .panel-title {
+    margin-top: -3px;
+    margin-bottom: -4px;
+    font-size: 15px;
+    color: inherit;
+}
+
+.unitsmr{
+  margin-top: -10px;
+}
+
+.nav-tabs.nav-justified li > .dropdown-menu li{
+  position: initial;
+  border-bottom: 0px solid;
+  display: inline-block;
+  zoom: 1;
+  width: 23%;
+}
+
+.nav-tabs.nav-justified li > .dropdown-menu li:nth-child(1){
+  margin-right: -14px;
+  margin-left: 5px;
+}
+
+.nav-tabs.nav-justified li > .dropdown-menu li a{
+  color: black;
+  font-weight: 500;
+}
+
+.fi{
+  background: #4CAF50;
+}
+.se{
+  background: #CDDC39;
+}
+.th{
+  background: #FDD835;
+}
+.fo{
+  background: #FFC107;
+}
+.fif{
+  background: #FF9800;
+}
+.si{
+  background: #F44336;
+}
+
+/* 전기요금 분석 탭 nav 및 contents */
+ /*Mobile Device (col-xs) 320 */
+@media only screen and (min-width: 320px) and (max-width: 359px) { 
+  .eleclevel, .user {
+    height: 9.0em;
+    padding-right: 0.5em;
+    margin-top: 0.0em;
+    margin-bottom: -1.0em;
+    margin-right: -2.0em;
+  }
+
+  .panel-body{
+    font-size: 0.9em;
+  }
+
+  .user h4:nth-child(1) {
+    margin-top: 1.2em;
+    margin-bottom: -0.3em;
+    font-size: 1em;
+  }
+
+  .nav-tabs.nav-justified li {
+    font-size: 0.92em;
+  }
+
+  .guideline {
+    margin-top: -1.0em;
+  }
+  
+  .nav-tabs.nav-justified li >.dropdown-menu.dropdown-menu-left{
+    margin-top: 3px;
+    position: absolute;
+    right: -1em;
+  }
+
+  .nav-tabs.nav-justified> li.active > a,
+  .nav-tabs.nav-justified> li.active > a:focus,
+  .nav-tabs.nav-justified> li.active > a:hover{
+    font-size: 1.0em;
+  }
+}
+
+ /*Mobile Device (col-xs) 360 | 375 | 414 */
+@media only screen and (min-width: 360px) and (max-width: 480px) {
+  .user h4:nth-child(1) {
+    margin-top: 1.0em;
+    margin-bottom: -0.3em;
+  }
+
+  .eleclevel ,.user{
+    height: 9.0em;
+    padding-right: 2.3em;
+    margin-top: 0.0em;
+    margin-bottom: -1.0em;
+  }
+
+  .guideline{
+    margin-top: -0.5em;
+  }
+
+  .nav-tabs.nav-justified li >.dropdown-menu.dropdown-menu-left {
+    margin-top: 3px;
+    position: absolute;
+    right: 1em;
+  }  
+}
+
+ /*Mobile Device (col-xs) 600 | 720 | 800 */
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .title h4 {
+      font-weight: 500;
+  }
+
+  .circle1 {
+    position: relative;
+    width: 7em;
+    height: 7em;
+  }
+
+  .fee h4 {
+    padding-top: 1.5em;
+    font-size: 1.7em;
+  }
+
+  .eleclevel, .user {
+    height: 10.0em;
+    padding-right: 8.5em;
+    margin-top: 0.0em;
+    margin-bottom: -1.0em;
+  }
+
+  .user h4:nth-child(1) {
+    margin-top: 1.8em;
+    margin-bottom: -0.3em;
+    font-size: 1em;
+  }
+
+  .circle {
+    width: 8.5em;
+    height: 8.5em;
+    margin-left: 6em;
+  }
+
+  .nav-tabs.nav-justified li >.dropdown-menu.dropdown-menu-left {
+    margin-top: 3px;
+    position: absolute;
+    left: 7em;
+  }  
+}
